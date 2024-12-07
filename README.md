@@ -6,6 +6,12 @@ This is a Minecraft clone built with OpenGL, GLFW, and GLEW. The project aims to
 - Project Directory
 	- `bin/` - Executable files
 	- `src/` - Source code
+	    - `vendor/` - Third party libraries
+			- `glm` - OpenGL Mathematics library
+			- `stb_image` - Image loading library
+		- `core/` - Core clases
+			- `Window` - Window class
+			- `Renderer` - Renderer class
 		- `main.cpp` - Main file
 	- `third_party/` - Third party libraries
 		- `glew` - OpenGL loader
