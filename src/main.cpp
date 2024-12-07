@@ -10,6 +10,7 @@
 #include "graphics/Buffer.hpp"
 #include "graphics/VertexBufferLayout.hpp"
 #include "graphics/VertexArray.hpp"
+#include "graphics/Shader.hpp"
 
 int main() {
     Window window(800, 600, "VoxelView");
@@ -51,10 +52,16 @@ int main() {
 
     vao.Unbind();
 
+    Shader shader("../res/shaders/basic.vert", "../res/shaders/basic.frag");
+
     while (!window.ShouldClose()) {
         // rendering commands here
         renderer.SetClearColor(glm::vec4(0.2f, 0.3f, 0.3f, 1.0f));
         renderer.Clear();
+
+        shader.Bind();
+        vao.Bind();
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
         // check and call events and swap the buffers
         window.SwapBuffers();
