@@ -24,6 +24,9 @@ Window::Window(int width, int height, std::string title)
 		return;
 	}
 
+	// Set the user pointer to the current instance
+	glfwSetWindowUserPointer(m_window, this);
+
 	// Make the window the current context
 	glfwMakeContextCurrent(m_window);
 
@@ -51,12 +54,19 @@ void Window::PollEvents()
 	glfwPollEvents();
 }
 
-static void FramebufferSizeCallback(GLFWwindow* window, int newWidth, int newHeight)
+void Window::FramebufferSizeCallback(GLFWwindow* window, int newWidth, int newHeight)
 {
-	glViewport(0, 0, newWidth, newHeight);
+	// Retrieve the Window instance from the GLFW window user pointer
+	Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
+	if (win)
+	{
+		win->m_width = newWidth;
+		win->m_height = newHeight;
+		glViewport(0, 0, newWidth, newHeight);
+	}
 }
 
-static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 #ifdef _DEBUG
 	std::cout << "Key: " << key << std::endl;

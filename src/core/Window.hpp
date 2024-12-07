@@ -15,6 +15,8 @@ class Window {
 		void PollEvents();
 	private:
 		void SetCallBacks();
+		static void FramebufferSizeCallback(GLFWwindow* window, int newWidth, int newHeight);
+		static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	private:
 		GLFWwindow* m_window;
 		int m_width, m_height;
