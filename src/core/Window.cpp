@@ -1,12 +1,20 @@
 #include "Window.hpp"
 
 Window::Window(int width, int height, std::string title)
-	: m_width(width), m_height(height)
+	: m_width(width), m_height(height), m_title(title)
 {
+}
+
+Window::~Window()
+{
+	glfwTerminate();
+}
+
+bool Window::Init() {
 	// Initialize GLFW
 	if (!glfwInit()) {
 		std::cerr << "Failed to initialize GLFW" << std::endl;
-		return;
+		return false;
 	}
 
 	// Set OpenGL version to 3.3 Core Profile
@@ -15,13 +23,13 @@ Window::Window(int width, int height, std::string title)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Create a window
-	m_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+	m_window = glfwCreateWindow(m_width, m_height, m_title.c_str(), nullptr, nullptr);
 
 	// Check if the window was created successfully
 	if (!m_window) {
 		std::cerr << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
-		return;
+		return false;
 	}
 
 	// Set the user pointer to the current instance
@@ -32,11 +40,8 @@ Window::Window(int width, int height, std::string title)
 
 	// Set the callback functions
 	SetCallBacks();
-}
 
-Window::~Window()
-{
-	glfwTerminate();
+	return true;
 }
 
 bool Window::ShouldClose()

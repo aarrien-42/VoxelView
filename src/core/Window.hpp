@@ -10,6 +10,7 @@ class Window {
 		Window(int width, int height, std::string title);
 		~Window();
 
+		bool Init();
 		bool ShouldClose();
 		void SwapBuffers();
 		void PollEvents();
@@ -19,5 +20,6 @@ class Window {
 		static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	private:
 		GLFWwindow* m_window;
+		std::string m_title;
 		int m_width, m_height;
 };

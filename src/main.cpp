@@ -7,6 +7,11 @@
 
 int main() {
     Window window(800, 600, "VoxelView");
+    if (!window.Init()) {
+		std::cerr << "Failed to initialize window" << std::endl;
+		return -1;
+	}
+
     Renderer renderer;
     if (!renderer.Init()) {
         std::cerr << "Failed to initialize renderer" << std::endl;
