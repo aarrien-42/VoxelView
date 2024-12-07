@@ -8,6 +8,8 @@
 #include "core/Renderer.hpp"
 
 #include "graphics/Buffer.hpp"
+#include "graphics/VertexBufferLayout.hpp"
+#include "graphics/VertexArray.hpp"
 
 int main() {
     Window window(800, 600, "VoxelView");
@@ -32,11 +34,22 @@ int main() {
 		0, 1, 2
 	};
 
+    VertexArray vao;
+    vao.Bind();
+
     Buffer vbo(Buffer::Type::VertexBuffer);
+    vbo.Bind();
     vbo.SetData(vertices, sizeof(vertices));
 
     Buffer ibo(Buffer::Type::IndexBuffer);
+    ibo.Bind();
     ibo.SetData(indices, sizeof(indices));
+
+    VertexBufferLayout layout;
+    layout.Push<float>(3); // position
+    vao.AddVertexBufferLayout(layout);
+
+    vao.Unbind();
 
     while (!window.ShouldClose()) {
         // rendering commands here
