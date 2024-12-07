@@ -1,0 +1,30 @@
+# Visual Studio
+*.vcxproj*
+*.vcxproj.filters
+*.vs
+.vscode/
+
+# CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Generated solution files
+*.sln
+
+# Build directories
+build/
+bin/
+out/
+
+# Compiled object files
+*.o
+*.obj
+*.lo
+*.slo
+
+# Executable files
+*.exe
+*.out
+*.app
