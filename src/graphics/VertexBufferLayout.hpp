@@ -1,7 +1,9 @@
 #pragma once
 
 #include <GL/glew.h>
+
 #include <vector>
+#include <stdexcept>
 
 struct VertexBufferElement {
 	unsigned int type;
@@ -29,12 +31,12 @@ class VertexBufferLayout {
 			unsigned int type = GetGLType<T>();
 			unsigned char normalized = IsNormalized<T>();
 
-			if (type != GL_FLOAT || type != GL_UNSIGNED_INT) {
+			if (type != GL_FLOAT && type != GL_UNSIGNED_INT) {
 				throw std::runtime_error("Unsupported type in VertexBufferLayout");
 			}
 
 			m_elements.push_back({ type, count, normalized });
-			m_stride += count * VertexBufferElement::getSizeOfType(type);
+			m_stride += count * VertexBufferElement::GetSizeOfType(type);
 		}
 
 		inline const std::vector<VertexBufferElement> GetElements() const { return m_elements; }
