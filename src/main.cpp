@@ -3,21 +3,20 @@
 #include <iostream>
 
 #include "core/Window.hpp"
+#include "core/Renderer.hpp"
 
 int main() {
     Window window(800, 600, "VoxelView");
-
-    // Initialize GLEW
-    if (glewInit() != GLEW_OK) {
-        std::cerr << "Failed to initialize GLEW" << std::endl;
-        glfwTerminate();
+    Renderer renderer;
+    if (!renderer.Init()) {
+        std::cerr << "Failed to initialize renderer" << std::endl;
         return -1;
     }
 
     while (!window.ShouldClose()) {
         // rendering commands here
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        renderer.SetClearColor(glm::vec4(0.2f, 0.3f, 0.3f, 1.0f));
+        renderer.Clear();
 
         // check and call events and swap the buffers
         window.SwapBuffers();
