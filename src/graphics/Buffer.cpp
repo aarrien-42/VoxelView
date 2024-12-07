@@ -1,11 +1,11 @@
 #include "Buffer.hpp"
 
-Buffer::Buffer(Type type) : m_Type(type) {
-	glGenBuffers(1, &m_ID);
+Buffer::Buffer(Type type) : m_type(type) {
+	glGenBuffers(1, &m_id);
 }
 
 Buffer::~Buffer() {
-	glDeleteBuffers(1, &m_ID);
+	glDeleteBuffers(1, &m_id);
 }
 
 void Buffer::Bind() const {
