@@ -61,7 +61,7 @@ int main() {
 
         shader.Bind();
         vao.Bind();
-        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+        renderer.Draw();
 
         // check and call events and swap the buffers
         window.SwapBuffers();
