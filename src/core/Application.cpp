@@ -30,9 +30,9 @@ bool Application::Init()
 void Application::Run()
 {
 	float vertices[] = {
-	-0.5f, -0.5f, 0.0f,
-	 0.5f, -0.5f, 0.0f,
-	 0.0f,  0.5f, 0.0f
+	-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+	 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+	 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
 	};
 
 	unsigned int indices[] = {
@@ -52,6 +52,7 @@ void Application::Run()
 
 	VertexBufferLayout layout;
 	layout.Push<float>(3); // position
+	layout.Push<float>(3); // color
 	vao.AddVertexBufferLayout(layout);
 
 	vao.Unbind();
