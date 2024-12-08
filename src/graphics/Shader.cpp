@@ -79,3 +79,23 @@ void Shader::Bind() const {
 void Shader::Unbind() const {
 	glUseProgram(0);
 }
+
+GLint Shader::GetUniformLocation(const std::string& name) const {
+	return glGetUniformLocation(m_id, name.c_str());
+}
+
+void Shader::SetUniform(const std::string& name, int value) const {
+	glUniform1i(GetUniformLocation(name), value);
+}
+
+void Shader::SetUniform(const std::string& name, float value) const {
+	glUniform1f(GetUniformLocation(name), value);
+}
+
+void Shader::SetUniform(const std::string& name, const glm::vec3& value) const {
+	glUniform3fv(GetUniformLocation(name), 1, &value[0]);
+}
+
+void Shader::SetUniform(const std::string& name, const glm::mat4& value) const {
+	glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &value[0][0]);
+}
