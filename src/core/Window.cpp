@@ -1,7 +1,7 @@
 #include "Window.hpp"
 
 Window::Window(int width, int height, std::string title)
-	: m_width(width), m_height(height), m_title(title)
+	: m_window(nullptr),  m_width(width), m_height(height), m_title(title)
 {
 }
 
