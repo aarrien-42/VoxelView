@@ -12,7 +12,7 @@ class Renderer {
 
 		bool Init();
 		void Clear();
-		void Draw(GLenum mode = GL_TRIANGLES);
+		void Draw(GLsizei count, GLenum mode = GL_TRIANGLES);
 
 		void SetClearColor(const glm::vec4& color);
 	private:

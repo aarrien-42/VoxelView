@@ -7,6 +7,7 @@
 #include "../graphics/VertexBufferLayout.hpp"
 #include "../graphics/VertexArray.hpp"
 #include "../graphics/Shader.hpp"
+#include "../graphics/Texture.hpp"
 
 class Application {
 	public:

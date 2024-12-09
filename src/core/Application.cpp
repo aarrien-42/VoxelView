@@ -30,13 +30,16 @@ bool Application::Init()
 void Application::Run()
 {
 	float vertices[] = {
-	-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-	 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-	 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
+	 // position         // color           // texture
+	-0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  0.0f, 0.0f,
+	 0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  1.0f, 0.0f,
+	 0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,  1.0f, 1.0f,
+	-0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f,
 	};
 
 	unsigned int indices[] = {
-		0, 1, 2
+		0, 1, 2,
+		0, 2, 3
 	};
 
 	VertexArray vao;
@@ -53,19 +56,23 @@ void Application::Run()
 	VertexBufferLayout layout;
 	layout.Push<float>(3); // position
 	layout.Push<float>(3); // color
+	layout.Push<float>(2); // texture
 	vao.AddVertexBufferLayout(layout);
 
 	vao.Unbind();
 
 	Shader shader("../res/shaders/basic.vert", "../res/shaders/basic.frag");
+	Texture texture("../res/textures/grass.png");
 
 	while (!m_window->ShouldClose()) {
 		m_renderer->SetClearColor(glm::vec4(0.2f, 0.3f, 0.3f, 1.0f));
 		m_renderer->Clear();
 
 		shader.Bind();
+		texture.Bind();
+
 		vao.Bind();
-		m_renderer->Draw();
+		m_renderer->Draw(sizeof(indices));
 
 		// check and call events and swap the buffers
 		m_window->SwapBuffers();

@@ -26,9 +26,9 @@ void Renderer::Clear()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Renderer::Draw(GLenum mode)
+void Renderer::Draw(GLsizei count, GLenum mode)
 {
-    glDrawElements(mode, 3, GL_UNSIGNED_INT, nullptr);
+    glDrawElements(mode, count, GL_UNSIGNED_INT, nullptr);
 }
 
 void Renderer::SetClearColor(const glm::vec4& color)
