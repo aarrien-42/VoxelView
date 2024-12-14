@@ -10,6 +10,16 @@ Window::~Window()
 	glfwTerminate();
 }
 
+int Window::GetWidth()
+{
+	return m_width;
+}
+
+int Window::GetHeight()
+{
+	return m_height;
+}
+
 bool Window::Init() {
 	// Initialize GLFW
 	if (!glfwInit()) {

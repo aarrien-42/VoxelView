@@ -10,6 +10,9 @@ class Window {
 		Window(int width, int height, std::string title);
 		~Window();
 
+		int GetWidth();
+		int GetHeight();
+
 		bool Init();
 		bool ShouldClose();
 		void SwapBuffers();

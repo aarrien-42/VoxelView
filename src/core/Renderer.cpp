@@ -17,6 +17,8 @@ bool Renderer::Init()
     }
 
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
+
+    glEnable(GL_DEPTH_TEST);
     
     return true;
 }
