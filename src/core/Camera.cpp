@@ -9,7 +9,7 @@ Camera::Camera() {
 }
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, glm::vec3 front)
-	: m_window(nullptr), m_position(position), m_worldUp(up), m_front(front)
+	: m_window(nullptr), m_movementProfile(FPS), m_position(position), m_worldUp(up), m_front(front)
 {
 	m_yaw = YAW;
 	m_pitch = PITCH;
@@ -19,6 +19,9 @@ Camera::Camera(glm::vec3 position, glm::vec3 up, glm::vec3 front)
 
 	m_lastX = (float)WINDOW_WIDTH / 2;
 	m_lastY = (float)WINDOW_HEIGHT / 2;
+
+	m_invertedX = false;
+	m_invertedY = false;
 	
 	UpdateCameraVectors();
 }
@@ -28,6 +31,11 @@ Camera::~Camera() {}
 void Camera::SetWindow(Window* window)
 {
 	m_window = window;
+}
+
+void Camera::SetMovementProfile(CameraMovementProfile profile)
+{
+	m_movementProfile = profile;
 }
 
 void Camera::SetPosition(float x, float y, float z)
@@ -45,18 +53,57 @@ void Camera::SetRotation(float x, float y, float z)
 
 void Camera::ProcessKeyboard()
 {
+	bool movingForward = (m_window->GetKeyState(FORWARD) == GLFW_PRESS);
+	bool movingBackward = (m_window->GetKeyState(BACKWARD) == GLFW_PRESS);
+	bool movingRight = (m_window->GetKeyState(RIGHT) == GLFW_PRESS);
+	bool movingLeft = (m_window->GetKeyState(LEFT) == GLFW_PRESS);
+	bool movingUp = (m_window->GetKeyState(UP) == GLFW_PRESS);
+	bool movingDown = (m_window->GetKeyState(DOWN) == GLFW_PRESS);
+	
+	bool worldRelativeMove;
+	if (m_movementProfile == FPS || m_movementProfile == TPS) {
+		worldRelativeMove = true;
+	} else {
+		worldRelativeMove = false;
+	}
+
 	float deltaTime = m_window->GetDeltaTime();
-	if (m_window->GetKeyState(FORWARD) == GLFW_PRESS) {
-		m_position += m_front * m_speed * deltaTime;
+	if (movingForward) {
+		if (worldRelativeMove) {
+			glm::vec3 relFront = glm::normalize(glm::vec3(m_front.x, 0.0f, m_front.z));
+			m_position += relFront * m_speed * deltaTime;
+		} else {
+			m_position += m_front * m_speed * deltaTime;
+		}
 	}
-	if (m_window->GetKeyState(BACKWARD) == GLFW_PRESS) {
-		m_position -= m_front * m_speed * deltaTime;
+	if (movingBackward) {
+		if (worldRelativeMove) {
+			glm::vec3 relFront = glm::normalize(glm::vec3(m_front.x, 0.0f, m_front.z));
+			m_position -= relFront * m_speed * deltaTime;
+		} else {
+			m_position -= m_front * m_speed * deltaTime;
+		}
 	}
-	if (m_window->GetKeyState(RIGHT) == GLFW_PRESS) {
+	if (movingRight) {
 		m_position += m_right * m_speed * deltaTime;
 	}
-	if (m_window->GetKeyState(LEFT) == GLFW_PRESS) {
+	if (movingLeft) {
 		m_position -= m_right * m_speed * deltaTime;
+	}
+	if (movingUp) {
+		if (worldRelativeMove) {
+			m_position += m_worldUp * m_speed * deltaTime;
+		}
+		else {
+			m_position += m_up * m_speed * deltaTime;
+		}
+	}
+	if (movingDown) {
+		if (worldRelativeMove) {
+			m_position -= m_worldUp * m_speed * deltaTime;
+		} else {
+			m_position -= m_up * m_speed * deltaTime;
+		}
 	}
 }
 
@@ -72,6 +119,13 @@ void Camera::ProcessMouseMove(float currentX, float currentY)
 	float offsetX = (currentX - m_lastX) * m_sensitivity;
 	float offsetY = (m_lastY - currentY) * m_sensitivity; // Reversed since y-coordinates range from bottom to top
 	
+	if (m_invertedX) {
+		offsetX = -offsetX;
+	}
+	if (m_invertedY) {
+		offsetY = -offsetY;
+	}
+
 	m_yaw += offsetX;
 	m_pitch += offsetY;
 	
