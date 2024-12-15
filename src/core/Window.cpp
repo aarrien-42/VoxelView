@@ -27,9 +27,9 @@ float Window::GetDeltaTime() const
 	return m_deltaTime;
 }
 
-GLFWwindow* Window::GetWindow() const
+void Window::GetCursorPos(double &x, double& y)
 {
-	return m_window;
+	glfwGetCursorPos(m_window, &x, &y);
 }
 
 int Window::GetKeyState(int key) const {

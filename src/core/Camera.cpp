@@ -103,7 +103,7 @@ void Camera::Update()
 {
 	// Mouse input
 	double currentX = 0.0, currentY = 0.0;
-	glfwGetCursorPos(m_window->GetWindow(), &currentX, &currentY);
+	m_window->GetCursorPos(currentX, currentY);
 	ProcessMouseMove(currentX, currentY);
 
 	// Keyboard input

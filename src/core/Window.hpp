@@ -18,7 +18,7 @@ class Window {
 		int GetWidth() const;
 		int GetHeight() const;
 		float GetDeltaTime() const;
-		GLFWwindow *GetWindow() const;
+		void GetCursorPos(double& x, double& y);
 		int GetKeyState(int key) const;
 
 		bool Init();
