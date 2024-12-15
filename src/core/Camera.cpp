@@ -142,11 +142,10 @@ glm::mat4 Camera::GetProjectionMatrix() const
 
 void Camera::UpdateCameraVectors()
 {
-	glm::vec3 front;
-	front.x = cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
-	front.y = sin(glm::radians(m_pitch));
-	front.z = sin(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
-	m_front = glm::normalize(front);
+	m_front.x = cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
+	m_front.y = sin(glm::radians(m_pitch));
+	m_front.z = sin(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
+	m_front = glm::normalize(m_front);
 
 	m_right = glm::normalize(glm::cross(m_front, m_worldUp));
 	m_up = glm::normalize(glm::cross(m_right, m_front));
