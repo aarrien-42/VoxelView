@@ -1,8 +1,10 @@
 #include "Window.hpp"
 
 Window::Window(int width, int height, std::string title)
-	: m_window(nullptr),  m_width(width), m_height(height), m_title(title)
+	: m_window(nullptr), m_width(width), m_height(height), m_title(title)
 {
+	m_lastFrame = 0.0f;
+	m_deltaTime = 0.0f;
 }
 
 Window::~Window()
@@ -10,14 +12,28 @@ Window::~Window()
 	glfwTerminate();
 }
 
-int Window::GetWidth()
+int Window::GetWidth() const
 {
 	return m_width;
 }
 
-int Window::GetHeight()
+int Window::GetHeight() const
 {
 	return m_height;
+}
+
+float Window::GetDeltaTime() const
+{
+	return m_deltaTime;
+}
+
+GLFWwindow* Window::GetWindow() const
+{
+	return m_window;
+}
+
+int Window::GetKeyState(int key) const {
+	return glfwGetKey(m_window, key);
 }
 
 bool Window::Init() {
@@ -51,6 +67,9 @@ bool Window::Init() {
 	// Set the callback functions
 	SetCallBacks();
 
+	// Cursor mode
+	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 	return true;
 }
 
@@ -66,7 +85,15 @@ void Window::SwapBuffers()
 
 void Window::PollEvents()
 {
+	UpdateDeltaTime();
 	glfwPollEvents();
+}
+
+void Window::UpdateDeltaTime()
+{
+	float currentFrame = static_cast<float>(glfwGetTime());
+	m_deltaTime = currentFrame - m_lastFrame;
+	m_lastFrame = currentFrame;
 }
 
 void Window::FramebufferSizeCallback(GLFWwindow* window, int newWidth, int newHeight)
@@ -92,6 +119,15 @@ void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 	}
+
+	// Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
+	// win->GetCamera()->ProcessKeyboard(key, action, win->GetDeltaTime());
+}
+
+void Window::CursorPositionCallback(GLFWwindow* window, double currentX, double currentY)
+{
+	// Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
+	// win->GetCamera()->ProcessMouseMove(currentX, currentY);
 }
 
 void Window::SetCallBacks()
@@ -101,4 +137,7 @@ void Window::SetCallBacks()
 
 	// Set the key callback
 	glfwSetKeyCallback(m_window, KeyCallback);
+
+	// Set the cursor position callback
+	glfwSetCursorPosCallback(m_window, CursorPositionCallback);
 }

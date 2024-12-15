@@ -2,6 +2,7 @@
 
 #include "Renderer.hpp"
 #include "Window.hpp"
+#include "Camera.hpp"
 
 #include "../graphics/Buffer.hpp"
 #include "../graphics/VertexBufferLayout.hpp"
