@@ -3,6 +3,7 @@
 #include "graphics/Renderer.hpp"
 #include "scene/Camera.hpp"
 #include "core/window/Window.hpp"
+#include "core/input/InputManager.hpp"
 
 #include "graphics/OpenGL/Buffer.hpp"
 #include "graphics/OpenGL/VertexBufferLayout.hpp"

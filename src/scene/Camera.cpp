@@ -9,7 +9,7 @@ Camera::Camera() {
 }
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, glm::vec3 front)
-	: m_window(nullptr), m_movementProfile(FPS), m_position(position), m_worldUp(up), m_front(front)
+	: m_position(position), m_worldUp(up), m_front(front)
 {
 	m_yaw = YAW;
 	m_pitch = PITCH;
@@ -28,16 +28,6 @@ Camera::Camera(glm::vec3 position, glm::vec3 up, glm::vec3 front)
 
 Camera::~Camera() {}
 
-void Camera::SetWindow(Window* window)
-{
-	m_window = window;
-}
-
-void Camera::SetMovementProfile(CameraMovementProfile profile)
-{
-	m_movementProfile = profile;
-}
-
 void Camera::SetPosition(float x, float y, float z)
 {
 	m_position = glm::vec3(x, y, z);
@@ -51,63 +41,37 @@ void Camera::SetRotation(float x, float y, float z)
 	UpdateCameraVectors();
 }
 
-void Camera::ProcessKeyboard()
+void Camera::HandleKeyboardInput(Action action, float deltaTime)
 {
-	bool movingForward = (m_window->GetKeyState(FORWARD) == GLFW_PRESS);
-	bool movingBackward = (m_window->GetKeyState(BACKWARD) == GLFW_PRESS);
-	bool movingRight = (m_window->GetKeyState(RIGHT) == GLFW_PRESS);
-	bool movingLeft = (m_window->GetKeyState(LEFT) == GLFW_PRESS);
-	bool movingUp = (m_window->GetKeyState(UP) == GLFW_PRESS);
-	bool movingDown = (m_window->GetKeyState(DOWN) == GLFW_PRESS);
-	
-	bool worldRelativeMove;
-	if (m_movementProfile == FPS || m_movementProfile == TPS) {
-		worldRelativeMove = true;
-	} else {
-		worldRelativeMove = false;
-	}
-
-	float deltaTime = m_window->GetDeltaTime();
-	if (movingForward) {
-		if (worldRelativeMove) {
-			glm::vec3 relFront = glm::normalize(glm::vec3(m_front.x, 0.0f, m_front.z));
-			m_position += relFront * m_speed * deltaTime;
-		} else {
+	switch (action) {
+		case Action::FORWARD: {
 			m_position += m_front * m_speed * deltaTime;
+			break;
 		}
-	}
-	if (movingBackward) {
-		if (worldRelativeMove) {
-			glm::vec3 relFront = glm::normalize(glm::vec3(m_front.x, 0.0f, m_front.z));
-			m_position -= relFront * m_speed * deltaTime;
-		} else {
+		case Action::BACKWARD: {
 			m_position -= m_front * m_speed * deltaTime;
+			break;
 		}
-	}
-	if (movingRight) {
-		m_position += m_right * m_speed * deltaTime;
-	}
-	if (movingLeft) {
-		m_position -= m_right * m_speed * deltaTime;
-	}
-	if (movingUp) {
-		if (worldRelativeMove) {
-			m_position += m_worldUp * m_speed * deltaTime;
+		case Action::RIGHT: {
+			m_position += m_right * m_speed * deltaTime;
+			break;
 		}
-		else {
+		case Action::LEFT: {
+			m_position -= m_right * m_speed * deltaTime;
+			break;
+		}
+		case Action::UP: {
 			m_position += m_up * m_speed * deltaTime;
+			break;
 		}
-	}
-	if (movingDown) {
-		if (worldRelativeMove) {
-			m_position -= m_worldUp * m_speed * deltaTime;
-		} else {
+		case Action::DOWN: {
 			m_position -= m_up * m_speed * deltaTime;
+			break;
 		}
 	}
 }
 
-void Camera::ProcessMouseMove(float currentX, float currentY)
+void Camera::HandleMouseInput(double& currentX, double& currentY)
 {
 	static bool firstMouse = true;
 	if (firstMouse) {
@@ -140,30 +104,6 @@ void Camera::ProcessMouseMove(float currentX, float currentY)
 	m_lastY = currentY;
 	
 	UpdateCameraVectors();
-}
-
-void Camera::ProcessMouseScroll(float y)
-{
-	m_fov -= y;
-	if (m_fov < 1.0f) {
-		m_fov = 1.0f;
-	}
-	if (m_fov > 45.0f) {
-		m_fov = 45.0f;
-	}
-}
-
-void Camera::Update()
-{
-	// Mouse input
-	double currentX = 0.0, currentY = 0.0;
-	m_window->GetCursorPos(currentX, currentY);
-	ProcessMouseMove(currentX, currentY);
-
-	// Keyboard input
-	ProcessKeyboard();
-	UpdateCameraVectors();
-	
 }
 
 void Camera::Move(float x, float y, float z)

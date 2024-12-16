@@ -117,8 +117,10 @@ void Application::Run()
 	Shader shader("../res/shaders/basic.vert", "../res/shaders/basic.frag");
 	Texture texture("../res/textures/grass.png");
 
+
 	Camera camera;
-	camera.SetWindow(m_window);
+	InputManager inputManager(m_window);
+	inputManager.RegisterAgent(&camera);
 
 	while (!m_window->ShouldClose()) {
 		m_renderer->SetClearColor(glm::vec4(0.2f, 0.3f, 0.3f, 1.0f));
@@ -141,11 +143,11 @@ void Application::Run()
 		shader.SetUniform("model", model);
 		m_renderer->Draw(sizeof(indices));
 
-		camera.Update();
-
 		// check and call events and swap the buffers
 		m_window->SwapBuffers();
-		m_window->PollEvents();
+
+		// Update the input events
+		inputManager.Update();
 
 		// Print the FPS
 		double currentTime = glfwGetTime();
