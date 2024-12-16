@@ -27,6 +27,11 @@ float Window::GetDeltaTime() const
 	return m_deltaTime;
 }
 
+float Window::GetFPS() const
+{
+	return 1.0f / m_deltaTime;
+}
+
 void Window::GetCursorPos(double &x, double& y)
 {
 	glfwGetCursorPos(m_window, &x, &y);
@@ -63,6 +68,9 @@ bool Window::Init() {
 
 	// Make the window the current context
 	glfwMakeContextCurrent(m_window);
+
+	// Enable VSync
+	glfwSwapInterval(1);
 
 	// Set the callback functions
 	SetCallBacks();
@@ -110,24 +118,13 @@ void Window::FramebufferSizeCallback(GLFWwindow* window, int newWidth, int newHe
 
 void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-#ifdef _DEBUG
-	std::cout << "Key: " << key << std::endl;
-	std::cout << "Scancode: " << scancode << std::endl;
-	std::cout << "Action: " << action << std::endl;
-	std::cout << "Mods: " << mods << std::endl;
-#endif
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 	}
-
-	// Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
-	// win->GetCamera()->ProcessKeyboard(key, action, win->GetDeltaTime());
 }
 
 void Window::CursorPositionCallback(GLFWwindow* window, double currentX, double currentY)
 {
-	// Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
-	// win->GetCamera()->ProcessMouseMove(currentX, currentY);
 }
 
 void Window::SetCallBacks()

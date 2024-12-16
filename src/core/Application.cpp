@@ -146,5 +146,13 @@ void Application::Run()
 		// check and call events and swap the buffers
 		m_window->SwapBuffers();
 		m_window->PollEvents();
+
+		// Print the FPS
+		double currentTime = glfwGetTime();
+		static float lastPrintTime = currentTime;
+		if (currentTime - lastPrintTime >= 0.5) {
+			std::cout << "\rFPS: " << (int)m_window->GetFPS() << "         " << std::flush;
+			lastPrintTime = currentTime;
+		}
 	}
 }

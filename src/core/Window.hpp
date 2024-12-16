@@ -18,6 +18,7 @@ class Window {
 		int GetWidth() const;
 		int GetHeight() const;
 		float GetDeltaTime() const;
+		float GetFPS() const;
 		void GetCursorPos(double &x, double& y);
 		int GetKeyState(int key) const;
 
