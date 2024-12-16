@@ -4,6 +4,10 @@
 
 #include <vector>
 
+enum BindingPreset {
+	DEFAULT
+};
+
 enum Action {
 	UNKNOWN,
 	FORWARD,
@@ -16,17 +20,24 @@ enum Action {
 
 class KeyBindings {
 	public:
-		KeyBindings() {}
-		~KeyBindings() {}
+		KeyBindings(BindingPreset preset = BindingPreset::DEFAULT);
+		~KeyBindings() = default;
 
+		void SetPreset(BindingPreset preset);
+		void SetDefaultBindings();
+
+		void InitBindings();
+		void UpdateBindings();
 		bool BindKey(int key, Action action);
 		std::vector<int> GetBindKeys () const;
 		Action GetKeyAction (int key) const;
 	private:
-		int m_forward = GLFW_KEY_W;
-		int m_backward = GLFW_KEY_S;
-		int m_left = GLFW_KEY_A;
-		int m_right = GLFW_KEY_D;
-		int m_up = GLFW_KEY_SPACE;
-		int m_down = GLFW_KEY_LEFT_SHIFT;
+		BindingPreset m_preset;
+
+		int m_forward;
+		int m_backward;
+		int m_left;
+		int m_right;
+		int m_up;
+		int m_down;
 };
