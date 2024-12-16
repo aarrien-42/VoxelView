@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Window.hpp"
+#include "core/window/Window.hpp"
 
 enum CameraMovement {
 	FORWARD = GLFW_KEY_W,

@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Renderer.hpp"
-#include "Window.hpp"
-#include "Camera.hpp"
+#include "graphics/Renderer.hpp"
+#include "core/Camera.hpp"
+#include "core/window/Window.hpp"
 
-#include "../graphics/Buffer.hpp"
-#include "../graphics/VertexBufferLayout.hpp"
-#include "../graphics/VertexArray.hpp"
-#include "../graphics/Shader.hpp"
-#include "../graphics/Texture.hpp"
+#include "graphics/OpenGL/Buffer.hpp"
+#include "graphics/OpenGL/VertexBufferLayout.hpp"
+#include "graphics/OpenGL/VertexArray.hpp"
+#include "graphics/OpenGL/Shader.hpp"
+#include "graphics/OpenGL/Texture.hpp"
 
 class Application {
 	public:
