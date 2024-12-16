@@ -1,7 +1,7 @@
 #pragma once
 
 #include "graphics/Renderer.hpp"
-#include "core/Camera.hpp"
+#include "scene/Camera.hpp"
 #include "core/window/Window.hpp"
 
 #include "graphics/OpenGL/Buffer.hpp"
