@@ -23,6 +23,8 @@ class Camera : public IControl {
 		void SetPosition(float x, float y, float z);
 		void SetRotation(float x, float y, float z);
 
+		glm::vec3 GetPosition() const { return m_position; }
+
 		void HandleKeyboardInput(Action action, float deltaTime) override;
 		void HandleMouseInput(double& x, double& y) override;
 

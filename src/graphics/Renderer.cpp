@@ -1,12 +1,8 @@
 #include "Renderer.hpp"
 
 Renderer::Renderer()
-{
-}
-
-Renderer::~Renderer()
-{
-}
+	: m_camera(nullptr)
+{}
 
 bool Renderer::Init()
 {
@@ -31,6 +27,26 @@ void Renderer::Clear()
 void Renderer::Draw(GLsizei count, GLenum mode)
 {
     glDrawElements(mode, count, GL_UNSIGNED_INT, nullptr);
+}
+
+void Renderer::Draw(Mesh& mesh, Shader& shader) {
+    if (m_camera == nullptr) {
+		std::cerr << "Camera is not set" << std::endl;
+		return;
+	}
+
+    mesh.Bind();
+    shader.Bind();
+
+    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 view = m_camera->GetViewMatrix();
+    glm::mat4 projection = m_camera->GetProjectionMatrix();
+
+    shader.SetUniform("model", model);
+    shader.SetUniform("view", view);
+    shader.SetUniform("projection", projection);
+
+    glDrawElements(GL_TRIANGLES, mesh.GetIndexCount(), GL_UNSIGNED_INT, nullptr);
 }
 
 void Renderer::SetClearColor(const glm::vec4& color)

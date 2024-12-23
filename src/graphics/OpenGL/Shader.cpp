@@ -96,6 +96,10 @@ void Shader::SetUniform(const std::string& name, float value) const {
 	glUniform1f(GetUniformLocation(name), value);
 }
 
+void Shader::SetUniform(const std::string& name, float v1, float v2, float v3) const {
+	glUniform3f(GetUniformLocation(name), v1, v2, v3);
+}
+
 void Shader::SetUniform(const std::string& name, const glm::vec3& value) const {
 	glUniform3fv(GetUniformLocation(name), 1, &value[0]);
 }

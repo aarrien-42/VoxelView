@@ -20,3 +20,13 @@ class Buffer {
 		GLuint m_id;
 		Type m_type;
 };
+
+class VertexBuffer : public Buffer {
+	public:
+		VertexBuffer() : Buffer(Buffer::Type::VertexBuffer) {}
+};
+
+class IndexBuffer : public Buffer {
+	public:
+		IndexBuffer() : Buffer(Buffer::Type::IndexBuffer) {}
+};

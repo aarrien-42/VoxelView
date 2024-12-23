@@ -7,7 +7,7 @@
 #include "core/Application.hpp"
 
 int main() {
-    Application app = Application(800, 600, "VoxelView");
+    Application app = Application(1280, 960, "VoxelView");
     if (!app.Init()) {
         return -1;
     }

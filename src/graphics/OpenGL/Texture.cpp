@@ -3,7 +3,7 @@
 Texture::Texture(const std::string& path)
 	: m_filePath(path), m_data(nullptr), m_width(0), m_height(0), m_bpp(0), m_id(0)
 {
-	stbi_set_flip_vertically_on_load(1);
+	stbi_set_flip_vertically_on_load(true);
 	m_data = stbi_load(path.c_str(), &m_width, &m_height, &m_bpp, 4);
 
 	glGenTextures(1, &m_id);

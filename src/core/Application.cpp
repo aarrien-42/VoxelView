@@ -34,44 +34,43 @@ bool Application::Init()
 void Application::Run()
 {
 	float vertices[] = {
-	 // position         // color           // texture
+	 // position         // normal
 
 	// FRONT
-	-0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.0f,  0.0f, 0.0f, // 0
-	 0.5f, -0.5f,  0.5f,  0.0f, 1.0f, 0.0f,  1.0f, 0.0f, // 1
-	 0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.0f,  1.0f, 1.0f, // 2
-	-0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f, // 3
+	-0.5f, -0.5f,  0.5f,   0.0f,  0.0f,  1.0f, // 0
+	 0.5f, -0.5f,  0.5f,   0.0f,  0.0f,  1.0f, // 1
+	 0.5f,  0.5f,  0.5f,   0.0f,  0.0f,  1.0f, // 2
+	-0.5f,  0.5f,  0.5f,   0.0f,  0.0f,  1.0f, // 3
 
-	// BACK
-	-0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f,  0.0f, 0.0f, // 4
-	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f,  1.0f, 0.0f, // 5
-	 0.5f,  0.5f, -0.5f,  0.0f, 0.0f, 1.0f,  1.0f, 1.0f, // 6
-	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f, // 7
+	// BACK				 
+ 	-0.5f, -0.5f, -0.5f,   0.0f,  0.0f, -1.0f, // 4
+	 0.5f, -0.5f, -0.5f,   0.0f,  0.0f, -1.0f, // 5
+	 0.5f,  0.5f, -0.5f,   0.0f,  0.0f, -1.0f, // 6
+	-0.5f,  0.5f, -0.5f,   0.0f,  0.0f, -1.0f, // 7
 
-	// LEFT
-	-0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f,  0.0f, 0.0f, // 8
-	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f,  1.0f, 0.0f, // 9
-	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f,  1.0f, 1.0f, // 10
-	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f, // 11
+	// LEFT				 				 
+	-0.5f, -0.5f, -0.5f,  -1.0f,  0.0f,  0.0f, // 8
+	-0.5f, -0.5f,  0.5f,  -1.0f,  0.0f,  0.0f, // 9
+	-0.5f,  0.5f,  0.5f,  -1.0f,  0.0f,  0.0f, // 10
+	-0.5f,  0.5f, -0.5f,  -1.0f,  0.0f,  0.0f, // 11
 
-	// RIGTH
-	 0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f,  0.0f, 0.0f, // 12
-	 0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f,  1.0f, 0.0f, // 13
-	 0.5f,  0.5f,  0.5f,  0.0f, 1.0f, 0.0f,  1.0f, 1.0f, // 14
-	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f, // 15
+	// RIGTH			 				 
+	 0.5f, -0.5f, -0.5f,   1.0f,  0.0f,  0.0f, // 12
+	 0.5f, -0.5f,  0.5f,   1.0f,  0.0f,  0.0f, // 13
+	 0.5f,  0.5f,  0.5f,   1.0f,  0.0f,  0.0f, // 14
+	 0.5f,  0.5f, -0.5f,   1.0f,  0.0f,  0.0f, // 15
 
-	// TOP
-	-0.5f,  0.5f, -0.5f,  1.0f, 0.0f, 0.0f,  0.0f, 0.0f, // 16
-	 0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.0f,  1.0f, 0.0f, // 17
-	 0.5f,  0.5f,  0.5f,  0.0f, 0.0f, 1.0f,  1.0f, 1.0f, // 18
-	-0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f, // 19
+	 // TOP				 				 
+	-0.5f,  0.5f, -0.5f,   0.0f,  1.0f,  0.0f, // 16
+	 0.5f,  0.5f, -0.5f,   0.0f,  1.0f,  0.0f, // 17
+	 0.5f,  0.5f,  0.5f,   0.0f,  1.0f,  0.0f, // 18
+	-0.5f,  0.5f,  0.5f,   0.0f,  1.0f,  0.0f, // 19
 
-	// BOTTOM
-	-0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f,  0.0f, 0.0f, // 20
-	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.0f,  1.0f, 0.0f, // 21
-	 0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 1.0f,  1.0f, 1.0f, // 22
-    -0.5f, -0.5f,  0.5f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f, // 23
-	 
+	// BOTTOM			 				 
+ 	-0.5f, -0.5f, -0.5f,   0.0f, -1.0f,  0.0f, // 20
+	 0.5f, -0.5f, -0.5f,   0.0f, -1.0f,  0.0f, // 21
+	 0.5f, -0.5f,  0.5f,   0.0f, -1.0f,  0.0f, // 22
+    -0.5f, -0.5f,  0.5f,   0.0f, -1.0f,  0.0f, // 23
 	};
 
 	unsigned int indices[] = {
@@ -95,53 +94,84 @@ void Application::Run()
 		20, 22, 23
 	};
 
-	VertexArray vao;
-	vao.Bind();
+	std::vector<Vertex> meshVertices {
+		// FRONT
+		{glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec3( 0.0f,  0.0f,  1.0f), glm::vec2( 0.0f,  0.0f)},  // 0 => Bottom Left
+		{glm::vec3( 0.5f, -0.5f,  0.5f), glm::vec3( 0.0f,  0.0f,  1.0f), glm::vec2( 1.0f,  0.0f)},  // 1 => Bottom Right
+		{glm::vec3( 0.5f,  0.5f,  0.5f), glm::vec3( 0.0f,  0.0f,  1.0f), glm::vec2( 1.0f,  1.0f)},  // 2 => Top Right
+		{glm::vec3(-0.5f,  0.5f,  0.5f), glm::vec3( 0.0f,  0.0f,  1.0f), glm::vec2( 0.0f,  1.0f)},  // 3 => Top Left
+																		
+		// BACK															
+		{glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec3( 0.0f,  0.0f, -1.0f), glm::vec2( 0.0f,  0.0f)},  // 4
+		{glm::vec3( 0.5f, -0.5f, -0.5f), glm::vec3( 0.0f,  0.0f, -1.0f), glm::vec2( 1.0f,  0.0f)},  // 5 
+		{glm::vec3( 0.5f,  0.5f, -0.5f), glm::vec3( 0.0f,  0.0f, -1.0f), glm::vec2( 1.0f,  1.0f)},  // 6
+		{glm::vec3(-0.5f,  0.5f, -0.5f), glm::vec3( 0.0f,  0.0f, -1.0f), glm::vec2( 0.0f,  1.0f)},  // 7
+																		
+		// LEFT				 				 							
+		{glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec2( 0.0f,  0.0f)},  // 8
+		{glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec2( 1.0f,  0.0f)},  // 9
+		{glm::vec3(-0.5f,  0.5f,  0.5f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec2( 1.0f,  1.0f)},  // 10
+		{glm::vec3(-0.5f,  0.5f, -0.5f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec2( 0.0f,  1.0f)},  // 11
+																		
+		// RIGTH														
+		{glm::vec3( 0.5f, -0.5f, -0.5f), glm::vec3( 1.0f,  0.0f,  0.0f), glm::vec2( 0.0f,  0.0f)},  // 12
+		{glm::vec3( 0.5f, -0.5f,  0.5f), glm::vec3( 1.0f,  0.0f,  0.0f), glm::vec2( 1.0f,  0.0f)},  // 13
+		{glm::vec3( 0.5f,  0.5f,  0.5f), glm::vec3( 1.0f,  0.0f,  0.0f), glm::vec2( 1.0f,  1.0f)},  // 14
+		{glm::vec3( 0.5f,  0.5f, -0.5f), glm::vec3( 1.0f,  0.0f,  0.0f), glm::vec2( 0.0f,  1.0f)},  // 15
+																		
+		// TOP				 				 							
+		{glm::vec3(-0.5f,  0.5f, -0.5f), glm::vec3( 0.0f,  1.0f,  0.0f), glm::vec2( 0.0f,  0.0f)},  // 16
+		{glm::vec3( 0.5f,  0.5f, -0.5f), glm::vec3( 0.0f,  1.0f,  0.0f), glm::vec2( 1.0f,  0.0f)},  // 17
+		{glm::vec3( 0.5f,  0.5f,  0.5f), glm::vec3( 0.0f,  1.0f,  0.0f), glm::vec2( 1.0f,  1.0f)},  // 18
+		{glm::vec3(-0.5f,  0.5f,  0.5f), glm::vec3( 0.0f,  1.0f,  0.0f), glm::vec2( 0.0f,  1.0f)},  // 19
+																		
+		// BOTTOM			 				 							
+		{glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec3( 0.0f, -1.0f,  0.0f), glm::vec2( 0.0f,  0.0f)},  // 20
+		{glm::vec3( 0.5f, -0.5f, -0.5f), glm::vec3( 0.0f, -1.0f,  0.0f), glm::vec2( 1.0f,  0.0f)},  // 21
+		{glm::vec3( 0.5f, -0.5f,  0.5f), glm::vec3( 0.0f, -1.0f,  0.0f), glm::vec2( 1.0f,  1.0f)},  // 22
+		{glm::vec3(-0.5f, -0.5f,  0.5f), glm::vec3( 0.0f, -1.0f,  0.0f), glm::vec2( 0.0f,  1.0f)}   // 23
+	};
 
-	Buffer vbo(Buffer::Type::VertexBuffer);
-	vbo.Bind();
-	vbo.SetData(vertices, sizeof(vertices));
+	std::vector<unsigned int> meshIndices{
+		// FRONT
+		0, 2, 1,
+		0, 2, 3,
+		// BACK
+		4, 6, 5,
+		4, 6, 7,
+		// LEFT
+		8, 10, 9,
+		8, 10, 11,
+		// RIGHT
+		12, 14, 13,
+		12, 14, 15,
+		// TOP
+		16, 18, 17,
+		16, 18, 19,
+		// BOTTOM
+		20, 22, 21,
+		20, 22, 23
+	};
 
-	Buffer ibo(Buffer::Type::IndexBuffer);
-	ibo.Bind();
-	ibo.SetData(indices, sizeof(indices));
+	Texture meshTexture("../res/textures/grass.png");
 
-	VertexBufferLayout layout;
-	layout.Push<float>(3); // position
-	layout.Push<float>(3); // color
-	layout.Push<float>(2); // texture
-	vao.AddVertexBufferLayout(layout);
-
-	vao.Unbind();
+	Mesh mesh(meshVertices, meshIndices, meshTexture);
 
 	Shader shader("../res/shaders/basic.vert", "../res/shaders/basic.frag");
-	Texture texture("../res/textures/grass.png");
-
 
 	Camera camera;
 	InputManager inputManager(m_window);
 	inputManager.RegisterAgent(&camera);
+	m_renderer->SetCamera(camera);
+
+	glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 	while (!m_window->ShouldClose()) {
 		m_renderer->SetClearColor(glm::vec4(0.2f, 0.3f, 0.3f, 1.0f));
 		m_renderer->Clear();
 
-		shader.Bind();
-		texture.Bind();
-		vao.Bind();
-
-		glm::mat4 model = glm::mat4(1.0f);
-		glm::mat4 view = camera.GetViewMatrix();
-		glm::mat4 projection = camera.GetProjectionMatrix();
-
-		shader.SetUniform("model", model);
-		shader.SetUniform("view", view);
-		shader.SetUniform("projection", projection);
-		m_renderer->Draw(sizeof(indices));
-
-		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
-		shader.SetUniform("model", model);
-		m_renderer->Draw(sizeof(indices));
+		// Draw mesh
+		m_renderer->Draw(mesh, shader);
 
 		// check and call events and swap the buffers
 		m_window->SwapBuffers();
