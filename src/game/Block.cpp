@@ -26,10 +26,10 @@ std::vector<Vertex> vertices {
 	{glm::vec3 ( 0.5f,  0.5f,  0.5f), glm::vec3 ( 1.0f,  0.0f,  0.0f), glm::vec2 (0.0f, 1.0f), glm::vec1(0.0f)}, // 15
 																								
 	// TOP																						
-	{glm::vec3 (-0.5f,  0.5f, -0.5f), glm::vec3 ( 0.0f,  1.0f,  0.0f), glm::vec2 (0.0f, 0.0f), glm::vec1(1.0f)}, // 16
-	{glm::vec3 ( 0.5f,  0.5f, -0.5f), glm::vec3 ( 0.0f,  1.0f,  0.0f), glm::vec2 (1.0f, 0.0f), glm::vec1(1.0f)}, // 17
-	{glm::vec3 ( 0.5f,  0.5f,  0.5f), glm::vec3 ( 0.0f,  1.0f,  0.0f), glm::vec2 (1.0f, 1.0f), glm::vec1(1.0f)}, // 18
-	{glm::vec3 (-0.5f,  0.5f,  0.5f), glm::vec3 ( 0.0f,  1.0f,  0.0f), glm::vec2 (0.0f, 1.0f), glm::vec1(1.0f)}, // 19
+	{glm::vec3 (-0.5f,  0.5f,  0.5f), glm::vec3 ( 0.0f,  1.0f,  0.0f), glm::vec2 (0.0f, 0.0f), glm::vec1(1.0f)}, // 16
+	{glm::vec3 ( 0.5f,  0.5f,  0.5f), glm::vec3 ( 0.0f,  1.0f,  0.0f), glm::vec2 (1.0f, 0.0f), glm::vec1(1.0f)}, // 17
+	{glm::vec3 ( 0.5f,  0.5f, -0.5f), glm::vec3 ( 0.0f,  1.0f,  0.0f), glm::vec2 (1.0f, 1.0f), glm::vec1(1.0f)}, // 18
+	{glm::vec3 (-0.5f,  0.5f, -0.5f), glm::vec3 ( 0.0f,  1.0f,  0.0f), glm::vec2 (0.0f, 1.0f), glm::vec1(1.0f)}, // 19
 																								
 	// BOTTOM																					
 	{glm::vec3 (-0.5f, -0.5f, -0.5f), glm::vec3 ( 0.0f, -1.0f,  0.0f), glm::vec2 (0.0f, 0.0f), glm::vec1(2.0f)}, // 20
