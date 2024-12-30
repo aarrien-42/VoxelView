@@ -73,7 +73,7 @@ std::vector<std::string> Block::GetTexturePaths () const
 	switch (m_blockType)
 	{
 		case BlockType::BEDROCK: {
-			texturePaths.push_back (texDirPath + "white_glazed_terracotta.png");
+			texturePaths.push_back (texDirPath + "bedrock.png");
 			break;
 		}
 		case BlockType::GRASS: {
