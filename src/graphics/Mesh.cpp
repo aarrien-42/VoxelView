@@ -1,7 +1,7 @@
 #include "Mesh.hpp"
 
 Mesh::Mesh (std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, Texture& texture)
-	: m_vertices (vertices), m_indices (indices), m_texture (texture)
+	: m_position (0.0f, 0.0f, 0.0f), m_vertices (vertices), m_indices (indices), m_texture (texture)
 {
 	SetupMesh ();
 }

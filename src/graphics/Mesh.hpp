@@ -20,13 +20,17 @@ class Mesh {
 		Mesh (std::vector<Vertex> &vertices, std::vector<unsigned int> &indices, Texture &texture);
 		~Mesh () = default;
 
-		size_t GetIndexCount () { return m_indices.size(); }
+		void SetPosition (const glm::vec3 &position) { m_position = position; }
+
+		glm::vec3 GetPosition () const { return m_position; }
+		size_t GetIndexCount () const { return m_indices.size(); }
 
 		void Bind ();
 		void Unbind ();
 	private:
 		void SetupMesh ();
 
+		glm::vec3 m_position;
 		std::vector<Vertex> &m_vertices;
 		std::vector<unsigned int> &m_indices;
 		Texture &m_texture;

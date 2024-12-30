@@ -41,7 +41,7 @@ void Renderer::Draw (Mesh& mesh, Shader& shader)
 	mesh.Bind ();
 	shader.Bind ();
 
-	glm::mat4 model = glm::mat4 (1.0f);
+	glm::mat4 model = glm::translate (glm::mat4 (1.0f), mesh.GetPosition ());
 	glm::mat4 view = m_camera->GetViewMatrix ();
 	glm::mat4 projection = m_camera->GetProjectionMatrix ();
 
