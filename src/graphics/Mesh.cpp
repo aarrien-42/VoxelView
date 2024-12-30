@@ -1,20 +1,18 @@
 #include "Mesh.hpp"
 
-Mesh::Mesh (std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, Texture& texture)
-	: m_position (0.0f, 0.0f, 0.0f), m_vertices (vertices), m_indices (indices), m_texture (texture)
+Mesh::Mesh (std::vector<Vertex>& vertices, std::vector<unsigned int>& indices)
+	: m_position (0.0f, 0.0f, 0.0f), m_vertices (vertices), m_indices (indices)
 {
 	SetupMesh ();
 }
 
 void Mesh::Bind ()
 {
-	m_texture.Bind ();
 	m_vao.Bind ();
 }
 
 void Mesh::Unbind ()
 {
-	m_texture.Unbind ();
 	m_vao.Unbind ();
 }
 

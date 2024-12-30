@@ -11,6 +11,8 @@
 #include "graphics/OpenGL/Shader.hpp"
 #include "graphics/OpenGL/Texture.hpp"
 
+#include "game/Block.hpp"
+
 /**
 * @brief Main application class
 */

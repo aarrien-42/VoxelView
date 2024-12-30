@@ -17,7 +17,7 @@ struct Vertex {
 
 class Mesh {
 	public:
-		Mesh (std::vector<Vertex> &vertices, std::vector<unsigned int> &indices, Texture &texture);
+		Mesh (std::vector<Vertex> &vertices, std::vector<unsigned int> &indices);
 		~Mesh () = default;
 
 		void SetPosition (const glm::vec3 &position) { m_position = position; }
@@ -27,13 +27,13 @@ class Mesh {
 
 		void Bind ();
 		void Unbind ();
+	protected:
+		glm::vec3 m_position;
 	private:
 		void SetupMesh ();
 
-		glm::vec3 m_position;
 		std::vector<Vertex> &m_vertices;
 		std::vector<unsigned int> &m_indices;
-		Texture &m_texture;
 
 		VertexArray m_vao;
 		VertexBuffer m_vbo;
