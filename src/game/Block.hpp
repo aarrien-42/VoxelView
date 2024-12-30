@@ -8,6 +8,7 @@
 #include "graphics/OpenGL/Texture.hpp"
 
 enum BlockType {
+	BEDROCK,
 	GRASS,
 	DIRT,
 	STONE

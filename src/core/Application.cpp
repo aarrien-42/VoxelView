@@ -35,7 +35,7 @@ bool Application::Init ()
 
 void Application::Run ()
 {
-	Block block (BlockType::GRASS, glm::vec3 (0.0f, 0.0f, 0.0f));
+	Block block (BlockType::BEDROCK, glm::vec3 (0.0f, 0.0f, 0.0f));
 	TextureArray textures (block.GetTexturePaths ());
 	textures.Bind ();
 	Shader shader ("../res/shaders/basic.vert", "../res/shaders/basic.frag");
