@@ -2,6 +2,9 @@
 
 #include "KeyBindings.hpp"
 
+/**
+* @brief Interface for input control
+*/
 class IControl {
 	public:
 		IControl () = default;

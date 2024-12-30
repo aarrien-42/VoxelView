@@ -8,6 +8,10 @@
 #include "KeyBindings.hpp"
 #include "IControl.hpp"
 
+
+/**
+* @brief Manages input from the user and sends it to the registered agents
+*/
 class InputManager {
 	public:
 		InputManager (Window* window);

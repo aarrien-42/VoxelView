@@ -14,6 +14,9 @@ const float SPEED = 5.0f;
 const float SENSITIVITY = 0.1f;
 const float FOV = 90.0f;
 
+/**
+ * @brief Represents a camera in the scene
+ */
 class Camera : public IControl {
 	public:
 		Camera ();
@@ -36,7 +39,7 @@ class Camera : public IControl {
 		glm::mat4 GetProjectionMatrix () const;
 	private:
 		void UpdateCameraVectors ();
-	private:
+
 		bool m_invertedX;
 		bool m_invertedY;
 

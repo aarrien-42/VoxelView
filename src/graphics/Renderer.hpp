@@ -9,6 +9,9 @@
 #include "graphics/OpenGL/Shader.hpp"
 #include "scene/Camera.hpp"
 
+/**
+* @brief Renderer class
+*/
 class Renderer {
 	public:
 		Renderer ();

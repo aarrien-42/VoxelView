@@ -18,6 +18,9 @@ enum Action {
 	DOWN
 };
 
+/**
+* @brief Manages key bindings for the application
+*/
 class KeyBindings {
 	public:
 		KeyBindings (BindingPreset preset = BindingPreset::DEFAULT);

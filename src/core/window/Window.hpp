@@ -8,6 +8,9 @@
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
 
+/**
+* @brief Represents a window for the application
+*/
 class Window {
 	public:
 		Window (int width, int height, std::string title);

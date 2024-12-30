@@ -11,6 +11,9 @@
 #include "graphics/OpenGL/Shader.hpp"
 #include "graphics/OpenGL/Texture.hpp"
 
+/**
+* @brief Main application class
+*/
 class Application {
 	public:
 		Application (int width, int height, std::string title);
