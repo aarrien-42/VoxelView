@@ -10,6 +10,7 @@
 #include "graphics/OpenGL/VertexArray.hpp"
 #include "graphics/OpenGL/Shader.hpp"
 #include "graphics/OpenGL/Texture.hpp"
+#include "graphics/OpenGL/TextureArray.hpp"
 
 #include "game/Block.hpp"
 

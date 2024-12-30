@@ -14,6 +14,7 @@ struct VertexBufferElement {
 	{
 		switch (type) {
 			case GL_FLOAT:			return sizeof(float);
+			case GL_INT:	return sizeof (int);
 			case GL_UNSIGNED_INT:	return sizeof(unsigned int);
 		}
 		throw std::runtime_error("Unsupported type in VertexBufferLayout");
@@ -31,7 +32,7 @@ class VertexBufferLayout {
 			unsigned int type = GetGLType<T>();
 			unsigned char normalized = IsNormalized<T>();
 
-			if (type != GL_FLOAT && type != GL_UNSIGNED_INT) {
+			if (type != GL_FLOAT && type != GL_UNSIGNED_INT && type != GL_INT) {
 				throw std::runtime_error("Unsupported type in VertexBufferLayout");
 			}
 
@@ -50,6 +51,8 @@ class VertexBufferLayout {
 		static unsigned int GetGLType () {
 			if constexpr (std::is_same<T, float>::value) {
 				return GL_FLOAT;
+			} else if constexpr (std::is_same<T, int>::value) {
+				return GL_INT;
 			} else if constexpr (std::is_same<T, unsigned int>::value) {
 				return GL_UNSIGNED_INT;
 			} else if constexpr (std::is_same<T, unsigned char>::value) {

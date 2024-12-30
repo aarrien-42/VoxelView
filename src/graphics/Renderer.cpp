@@ -48,6 +48,7 @@ void Renderer::Draw (Mesh& mesh, Shader& shader)
 	shader.SetUniform ("model", model);
 	shader.SetUniform ("view", view);
 	shader.SetUniform ("projection", projection);
+	shader.SetUniform ("textureArray", 0);
 
 	glDrawElements (GL_TRIANGLES, mesh.GetIndexCount (), GL_UNSIGNED_INT, nullptr);
 }
