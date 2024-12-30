@@ -8,10 +8,10 @@ std::vector<Vertex> vertices {
 	{glm::vec3 (-0.5f,  0.5f,  0.5f), glm::vec3 ( 0.0f,  0.0f,  1.0f), glm::vec2 (0.0f, 1.0f), glm::vec1(0.0f)}, // 3 => Top Left
 																								
 	// BACK																						
-	{glm::vec3 (-0.5f, -0.5f, -0.5f), glm::vec3 ( 0.0f,  0.0f, -1.0f), glm::vec2 (0.0f, 0.0f), glm::vec1(0.0f)}, // 4
-	{glm::vec3 ( 0.5f, -0.5f, -0.5f), glm::vec3 ( 0.0f,  0.0f, -1.0f), glm::vec2 (1.0f, 0.0f), glm::vec1(0.0f)}, // 5 
-	{glm::vec3 ( 0.5f,  0.5f, -0.5f), glm::vec3 ( 0.0f,  0.0f, -1.0f), glm::vec2 (1.0f, 1.0f), glm::vec1(0.0f)}, // 6
-	{glm::vec3 (-0.5f,  0.5f, -0.5f), glm::vec3 ( 0.0f,  0.0f, -1.0f), glm::vec2 (0.0f, 1.0f), glm::vec1(0.0f)}, // 7
+	{glm::vec3 ( 0.5f, -0.5f, -0.5f), glm::vec3 ( 0.0f,  0.0f, -1.0f), glm::vec2 (0.0f, 0.0f), glm::vec1(0.0f)}, // 4
+	{glm::vec3 (-0.5f, -0.5f, -0.5f), glm::vec3 ( 0.0f,  0.0f, -1.0f), glm::vec2 (1.0f, 0.0f), glm::vec1(0.0f)}, // 5 
+	{glm::vec3 (-0.5f,  0.5f, -0.5f), glm::vec3 ( 0.0f,  0.0f, -1.0f), glm::vec2 (1.0f, 1.0f), glm::vec1(0.0f)}, // 6
+	{glm::vec3 ( 0.5f,  0.5f, -0.5f), glm::vec3 ( 0.0f,  0.0f, -1.0f), glm::vec2 (0.0f, 1.0f), glm::vec1(0.0f)}, // 7
 																								
 	// LEFT																						
 	{glm::vec3 (-0.5f, -0.5f, -0.5f), glm::vec3 (-1.0f,  0.0f,  0.0f), glm::vec2 (0.0f, 0.0f), glm::vec1(0.0f)}, // 8
@@ -20,10 +20,10 @@ std::vector<Vertex> vertices {
 	{glm::vec3 (-0.5f,  0.5f, -0.5f), glm::vec3 (-1.0f,  0.0f,  0.0f), glm::vec2 (0.0f, 1.0f), glm::vec1(0.0f)}, // 11
 																								
 	// RIGTH
-	{glm::vec3 ( 0.5f, -0.5f, -0.5f), glm::vec3 ( 1.0f,  0.0f,  0.0f), glm::vec2 (0.0f, 0.0f), glm::vec1(0.0f)}, // 12
-	{glm::vec3 ( 0.5f, -0.5f,  0.5f), glm::vec3 ( 1.0f,  0.0f,  0.0f), glm::vec2 (1.0f, 0.0f), glm::vec1(0.0f)}, // 13
-	{glm::vec3 ( 0.5f,  0.5f,  0.5f), glm::vec3 ( 1.0f,  0.0f,  0.0f), glm::vec2 (1.0f, 1.0f), glm::vec1(0.0f)}, // 14
-	{glm::vec3 ( 0.5f,  0.5f, -0.5f), glm::vec3 ( 1.0f,  0.0f,  0.0f), glm::vec2 (0.0f, 1.0f), glm::vec1(0.0f)}, // 15
+	{glm::vec3 ( 0.5f, -0.5f,  0.5f), glm::vec3 ( 1.0f,  0.0f,  0.0f), glm::vec2 (0.0f, 0.0f), glm::vec1(0.0f)}, // 12
+	{glm::vec3 ( 0.5f, -0.5f, -0.5f), glm::vec3 ( 1.0f,  0.0f,  0.0f), glm::vec2 (1.0f, 0.0f), glm::vec1(0.0f)}, // 13
+	{glm::vec3 ( 0.5f,  0.5f, -0.5f), glm::vec3 ( 1.0f,  0.0f,  0.0f), glm::vec2 (1.0f, 1.0f), glm::vec1(0.0f)}, // 14
+	{glm::vec3 ( 0.5f,  0.5f,  0.5f), glm::vec3 ( 1.0f,  0.0f,  0.0f), glm::vec2 (0.0f, 1.0f), glm::vec1(0.0f)}, // 15
 																								
 	// TOP																						
 	{glm::vec3 (-0.5f,  0.5f, -0.5f), glm::vec3 ( 0.0f,  1.0f,  0.0f), glm::vec2 (0.0f, 0.0f), glm::vec1(1.0f)}, // 16
@@ -73,7 +73,7 @@ std::vector<std::string> Block::GetTexturePaths () const
 	switch (m_blockType)
 	{
 		case BlockType::BEDROCK: {
-			texturePaths.push_back (texDirPath + "bedrock.png");
+			texturePaths.push_back (texDirPath + "white_glazed_terracotta.png");
 			break;
 		}
 		case BlockType::GRASS: {
