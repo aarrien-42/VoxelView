@@ -20,15 +20,15 @@ enum Action {
 
 class KeyBindings {
 	public:
-		KeyBindings(BindingPreset preset = BindingPreset::DEFAULT);
-		~KeyBindings() = default;
+		KeyBindings (BindingPreset preset = BindingPreset::DEFAULT);
+		~KeyBindings () = default;
 
-		void SetPreset(BindingPreset preset);
-		void SetDefaultBindings();
+		void SetPreset (BindingPreset preset);
+		void SetDefaultBindings ();
 
-		void InitBindings();
-		void UpdateBindings();
-		bool BindKey(int key, Action action);
+		void InitBindings ();
+		void UpdateBindings ();
+		bool BindKey (int key, Action action);
 		std::vector<int> GetBindKeys () const;
 		Action GetKeyAction (int key) const;
 	private:

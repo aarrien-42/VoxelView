@@ -10,12 +10,12 @@
 
 class InputManager {
 	public:
-		InputManager(Window* window);
-		~InputManager();
+		InputManager (Window* window);
+		~InputManager () = default;
 
-		void Update();
-		void RegisterAgent(IControl* agent);
-		void UnregisterAgent(IControl* agent);
+		void Update ();
+		void RegisterAgent (IControl* agent);
+		void UnregisterAgent (IControl* agent);
 	private:
 		KeyBindings m_keyBindings;
 		Window* m_window;

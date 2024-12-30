@@ -11,17 +11,17 @@
 
 class Renderer {
 	public:
-		Renderer();
-		~Renderer() = default;
+		Renderer ();
+		~Renderer () = default;
 
-		void SetCamera(Camera &camera) { m_camera = &camera; }
+		void SetCamera (Camera &camera) { m_camera = &camera; }
 
-		bool Init();
-		void Clear();
-		void Draw(GLsizei count, GLenum mode = GL_TRIANGLES);
-		void Draw(Mesh& mesh, Shader& shader);
+		bool Init ();
+		void Clear ();
+		void Draw (GLsizei count, GLenum mode = GL_TRIANGLES);
+		void Draw (Mesh& mesh, Shader& shader);
 
-		void SetClearColor(const glm::vec4& color);
+		void SetClearColor (const glm::vec4& color);
 	private:
 		Camera *m_camera;
 };

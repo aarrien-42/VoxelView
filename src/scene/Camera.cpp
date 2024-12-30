@@ -1,15 +1,16 @@
 #include "Camera.hpp"
 
-Camera::Camera() {
-	glm::vec3 position = glm::vec3(0.0f, 0.0f, 3.0f);
-	glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-	glm::vec3 front = glm::vec3(0.0f, 0.0f, -1.0f);
+Camera::Camera ()
+{
+	glm::vec3 position = glm::vec3 (0.0f, 0.0f, 3.0f);
+	glm::vec3 up = glm::vec3 (0.0f, 1.0f, 0.0f);
+	glm::vec3 front = glm::vec3 (0.0f, 0.0f, -1.0f);
 
-	*this = Camera(position, up, front);
+	*this = Camera (position, up, front);
 }
 
-Camera::Camera(glm::vec3 position, glm::vec3 up, glm::vec3 front)
-	: m_position(position), m_worldUp(up), m_front(front)
+Camera::Camera (glm::vec3 position, glm::vec3 up, glm::vec3 front)
+	: m_position (position), m_worldUp (up), m_front (front)
 {
 	m_yaw = YAW;
 	m_pitch = PITCH;
@@ -22,28 +23,27 @@ Camera::Camera(glm::vec3 position, glm::vec3 up, glm::vec3 front)
 
 	m_invertedX = false;
 	m_invertedY = false;
-	
-	UpdateCameraVectors();
+
+	UpdateCameraVectors ();
 }
 
-Camera::~Camera() {}
-
-void Camera::SetPosition(float x, float y, float z)
+void Camera::SetPosition (float x, float y, float z)
 {
-	m_position = glm::vec3(x, y, z);
+	m_position = glm::vec3 (x, y, z);
 }
 
-void Camera::SetRotation(float x, float y, float z)
+void Camera::SetRotation (float x, float y, float z)
 {
 	m_yaw = x;
 	m_pitch = y;
 
-	UpdateCameraVectors();
+	UpdateCameraVectors ();
 }
 
-void Camera::HandleKeyboardInput(Action action, float deltaTime)
+void Camera::HandleKeyboardInput (Action action, float deltaTime)
 {
-	switch (action) {
+	switch (action)
+	{
 		case Action::FORWARD: {
 			m_position += m_front * m_speed * deltaTime;
 			break;
@@ -71,76 +71,81 @@ void Camera::HandleKeyboardInput(Action action, float deltaTime)
 	}
 }
 
-void Camera::HandleMouseInput(double& currentX, double& currentY)
+void Camera::HandleMouseInput (double& currentX, double& currentY)
 {
 	static bool firstMouse = true;
-	if (firstMouse) {
+	if (firstMouse)
+	{
 		m_lastX = currentX;
 		m_lastY = currentY;
 		firstMouse = false;
 	}
-	
+
 	float offsetX = (currentX - m_lastX) * m_sensitivity;
 	float offsetY = (m_lastY - currentY) * m_sensitivity; // Reversed since y-coordinates range from bottom to top
-	
-	if (m_invertedX) {
+
+	if (m_invertedX)
+	{
 		offsetX = -offsetX;
 	}
-	if (m_invertedY) {
+	if (m_invertedY)
+	{
 		offsetY = -offsetY;
 	}
 
 	m_yaw += offsetX;
 	m_pitch += offsetY;
-	
-	if (m_pitch > 89.0f) {
+
+	if (m_pitch > 89.0f)
+	{
 		m_pitch = 89.0f;
 	}
-	if (m_pitch < -89.0f) {
+	if (m_pitch < -89.0f)
+	{
 		m_pitch = -89.0f;
 	}
 
 	m_lastX = currentX;
 	m_lastY = currentY;
-	
-	UpdateCameraVectors();
+
+	UpdateCameraVectors ();
 }
 
-void Camera::Move(float x, float y, float z)
+void Camera::Move (float x, float y, float z)
 {
-	m_position = glm::vec3(x, y, z);
+	m_position = glm::vec3 (x, y, z);
 }
 
-void Camera::Rotate(float x, float y, float z)
+void Camera::Rotate (float x, float y, float z)
 {
 	m_yaw = x;
 	m_pitch = y;
 
-	UpdateCameraVectors();
+	UpdateCameraVectors ();
 }
 
-void Camera::Zoom(float x)
+void Camera::Zoom (float x)
 {
 	m_fov = x;
 }
 
-glm::mat4 Camera::GetViewMatrix() const
+glm::mat4 Camera::GetViewMatrix () const
 {
-	return glm::lookAt(m_position, m_position + m_front, m_up);
+	return glm::lookAt (m_position, m_position + m_front, m_up);
 }
 
-glm::mat4 Camera::GetProjectionMatrix() const
+glm::mat4 Camera::GetProjectionMatrix () const
 {
-	return glm::perspective(glm::radians(m_fov), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
+	return glm::perspective (glm::radians (m_fov), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
 }
 
-void Camera::UpdateCameraVectors()
+void Camera::UpdateCameraVectors ()
 {
-	m_front.x = cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
-	m_front.y = sin(glm::radians(m_pitch));
-	m_front.z = sin(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
-	m_front = glm::normalize(m_front);
+	m_front.x = cos (glm::radians (m_yaw)) * cos (glm::radians (m_pitch));
+	m_front.y = sin (glm::radians (m_pitch));
+	m_front.z = sin (glm::radians (m_yaw)) * cos (glm::radians (m_pitch));
+	m_front = glm::normalize (m_front);
 
-	m_right = glm::normalize(glm::cross(m_front, m_worldUp));
-	m_up = glm::normalize(glm::cross(m_right, m_front));
+	m_right = glm::normalize (glm::cross (m_front, m_worldUp));
+	m_up = glm::normalize (glm::cross (m_right, m_front));
 }

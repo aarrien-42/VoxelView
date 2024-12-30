@@ -1,140 +1,144 @@
 #include "Window.hpp"
 
-Window::Window(int width, int height, std::string title)
-	: m_window(nullptr), m_width(width), m_height(height), m_title(title)
+Window::Window (int width, int height, std::string title)
+	: m_window (nullptr), m_width (width), m_height (height), m_title (title)
 {
 	m_lastFrame = 0.0f;
 	m_deltaTime = 0.0f;
 }
 
-Window::~Window()
+Window::~Window ()
 {
-	glfwTerminate();
+	glfwTerminate ();
 }
 
-int Window::GetWidth() const
+int Window::GetWidth () const
 {
 	return m_width;
 }
 
-int Window::GetHeight() const
+int Window::GetHeight () const
 {
 	return m_height;
 }
 
-float Window::GetDeltaTime() const
+float Window::GetDeltaTime () const
 {
 	return m_deltaTime;
 }
 
-float Window::GetFPS() const
+float Window::GetFPS () const
 {
 	return 1.0f / m_deltaTime;
 }
 
-void Window::GetCursorPos(double &x, double& y)
+void Window::GetCursorPos (double& x, double& y)
 {
-	glfwGetCursorPos(m_window, &x, &y);
+	glfwGetCursorPos (m_window, &x, &y);
 }
 
-int Window::GetKeyState(int key) const {
-	return glfwGetKey(m_window, key);
+int Window::GetKeyState (int key) const
+{
+	return glfwGetKey (m_window, key);
 }
 
-bool Window::Init() {
+bool Window::Init ()
+{
 	// Initialize GLFW
-	if (!glfwInit()) {
+	if (!glfwInit ())
+	{
 		std::cerr << "Failed to initialize GLFW" << std::endl;
 		return false;
 	}
 
 	// Set OpenGL version to 4.1 Core Profile
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 1);
+	glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Create a window
-	m_window = glfwCreateWindow(m_width, m_height, m_title.c_str(), nullptr, nullptr);
+	m_window = glfwCreateWindow (m_width, m_height, m_title.c_str (), nullptr, nullptr);
 
 	// Check if the window was created successfully
-	if (!m_window) {
+	if (!m_window)
+	{
 		std::cerr << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
+		glfwTerminate ();
 		return false;
 	}
 
 	// Set the user pointer to the current instance
-	glfwSetWindowUserPointer(m_window, this);
+	glfwSetWindowUserPointer (m_window, this);
 
 	// Make the window the current context
-	glfwMakeContextCurrent(m_window);
+	glfwMakeContextCurrent (m_window);
 
 	// Enable VSync
-	glfwSwapInterval(1);
+	glfwSwapInterval (1);
 
 	// Set the callback functions
-	SetCallBacks();
+	SetCallBacks ();
 
 	// Cursor mode
-	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode (m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	return true;
 }
 
-bool Window::ShouldClose()
+bool Window::ShouldClose ()
 {
-	return glfwWindowShouldClose(m_window);
+	return glfwWindowShouldClose (m_window);
 }
 
-void Window::SwapBuffers()
+void Window::SwapBuffers ()
 {
-	glfwSwapBuffers(m_window);
+	glfwSwapBuffers (m_window);
 }
 
-void Window::PollEvents()
+void Window::PollEvents ()
 {
-	UpdateDeltaTime();
-	glfwPollEvents();
+	UpdateDeltaTime ();
+	glfwPollEvents ();
 }
 
-void Window::UpdateDeltaTime()
+void Window::UpdateDeltaTime ()
 {
-	float currentFrame = static_cast<float>(glfwGetTime());
+	float currentFrame = static_cast<float>(glfwGetTime ());
 	m_deltaTime = currentFrame - m_lastFrame;
 	m_lastFrame = currentFrame;
 }
 
-void Window::FramebufferSizeCallback(GLFWwindow* window, int newWidth, int newHeight)
+void Window::FramebufferSizeCallback (GLFWwindow* window, int newWidth, int newHeight)
 {
 	// Retrieve the Window instance from the GLFW window user pointer
-	Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
+	Window* win = static_cast<Window*>(glfwGetWindowUserPointer (window));
 	if (win)
 	{
 		win->m_width = newWidth;
 		win->m_height = newHeight;
-		glViewport(0, 0, newWidth, newHeight);
+		glViewport (0, 0, newWidth, newHeight);
 	}
 }
 
-void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void Window::KeyCallback (GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-		glfwSetWindowShouldClose(window, GLFW_TRUE);
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose (window, GLFW_TRUE);
 	}
 }
 
-void Window::CursorPositionCallback(GLFWwindow* window, double currentX, double currentY)
-{
-}
+void Window::CursorPositionCallback (GLFWwindow* window, double currentX, double currentY)
+{}
 
-void Window::SetCallBacks()
+void Window::SetCallBacks ()
 {
 	// Set the framebuffer size callback
-	glfwSetFramebufferSizeCallback(m_window, FramebufferSizeCallback);
+	glfwSetFramebufferSizeCallback (m_window, FramebufferSizeCallback);
 
 	// Set the key callback
-	glfwSetKeyCallback(m_window, KeyCallback);
+	glfwSetKeyCallback (m_window, KeyCallback);
 
 	// Set the cursor position callback
-	glfwSetCursorPosCallback(m_window, CursorPositionCallback);
+	glfwSetCursorPosCallback (m_window, CursorPositionCallback);
 }

@@ -6,12 +6,14 @@
 
 #include "core/Application.hpp"
 
-int main() {
-    Application app = Application(1280, 960, "VoxelView");
-    if (!app.Init()) {
-        return -1;
-    }
-    app.Run();
+int main ()
+{
+	Application app = Application (1280, 960, "VoxelView");
+	if (!app.Init ())
+	{
+		return -1;
+	}
+	app.Run ();
 
-    return 0;
+	return 0;
 }

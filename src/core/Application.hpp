@@ -13,11 +13,11 @@
 
 class Application {
 	public:
-		Application(int width, int height, std::string title);
-		~Application();
+		Application (int width, int height, std::string title);
+		~Application ();
 
-		bool Init();
-		void Run();
+		bool Init ();
+		void Run ();
 	private:
 		Window* m_window;
 		Renderer* m_renderer;

@@ -17,15 +17,15 @@ struct Vertex {
 
 class Mesh {
 	public:
-		Mesh(std::vector<Vertex> &vertices, std::vector<unsigned int> &indices, Texture &texture);
-		~Mesh() = default;
+		Mesh (std::vector<Vertex> &vertices, std::vector<unsigned int> &indices, Texture &texture);
+		~Mesh () = default;
 
-		size_t GetIndexCount() { return m_indices.size(); }
+		size_t GetIndexCount () { return m_indices.size(); }
 
-		void Bind();
-		void Unbind();
+		void Bind ();
+		void Unbind ();
 	private:
-		void SetupMesh();
+		void SetupMesh ();
 
 		std::vector<Vertex> &m_vertices;
 		std::vector<unsigned int> &m_indices;

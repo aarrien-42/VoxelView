@@ -16,26 +16,26 @@ const float FOV = 90.0f;
 
 class Camera : public IControl {
 	public:
-		Camera();
-		Camera(glm::vec3 position, glm::vec3 up, glm::vec3 front);
-		~Camera();
+		Camera ();
+		Camera (glm::vec3 position, glm::vec3 up, glm::vec3 front);
+		~Camera () = default;
 
-		void SetPosition(float x, float y, float z);
-		void SetRotation(float x, float y, float z);
+		void SetPosition (float x, float y, float z);
+		void SetRotation (float x, float y, float z);
 
-		glm::vec3 GetPosition() const { return m_position; }
+		glm::vec3 GetPosition () const { return m_position; }
 
-		void HandleKeyboardInput(Action action, float deltaTime) override;
-		void HandleMouseInput(double& x, double& y) override;
+		void HandleKeyboardInput (Action action, float deltaTime) override;
+		void HandleMouseInput (double& x, double& y) override;
 
-		void Move(float x, float y, float z);
-		void Rotate(float x, float y, float z);
+		void Move (float x, float y, float z);
+		void Rotate (float x, float y, float z);
 		void Zoom (float x);
 
-		glm::mat4 GetViewMatrix() const;
-		glm::mat4 GetProjectionMatrix() const;
+		glm::mat4 GetViewMatrix () const;
+		glm::mat4 GetProjectionMatrix () const;
 	private:
-		void UpdateCameraVectors();
+		void UpdateCameraVectors ();
 	private:
 		bool m_invertedX;
 		bool m_invertedY;

@@ -10,7 +10,7 @@ struct VertexBufferElement {
 	unsigned int count;
 	unsigned char normalized;
 
-	static unsigned int GetSizeOfType(unsigned int type)
+	static unsigned int GetSizeOfType (unsigned int type)
 	{
 		switch (type) {
 			case GL_FLOAT:			return sizeof(float);
@@ -23,11 +23,11 @@ struct VertexBufferElement {
 
 class VertexBufferLayout {
 	public:
-		VertexBufferLayout()
+		VertexBufferLayout ()
 			: m_stride(0) {}
 
 		template<typename T>
-		void Push(unsigned int count) {
+		void Push (unsigned int count) {
 			unsigned int type = GetGLType<T>();
 			unsigned char normalized = IsNormalized<T>();
 
@@ -35,19 +35,19 @@ class VertexBufferLayout {
 				throw std::runtime_error("Unsupported type in VertexBufferLayout");
 			}
 
-			m_elements.push_back({ type, count, normalized });
-			m_stride += count * VertexBufferElement::GetSizeOfType(type);
+			m_elements.push_back ({ type, count, normalized });
+			m_stride += count * VertexBufferElement::GetSizeOfType (type);
 		}
 
-		inline const std::vector<VertexBufferElement> GetElements() const { return m_elements; }
-		inline unsigned int GetStride() const { return m_stride; }
+		inline const std::vector<VertexBufferElement> GetElements () const { return m_elements; }
+		inline unsigned int GetStride () const { return m_stride; }
 	private:
 		std::vector<VertexBufferElement> m_elements;
 		unsigned int m_stride;
 
 		// Helper for OpenGL type mapping
 		template<typename T>
-		static unsigned int GetGLType() {
+		static unsigned int GetGLType () {
 			if constexpr (std::is_same<T, float>::value) {
 				return GL_FLOAT;
 			} else if constexpr (std::is_same<T, unsigned int>::value) {
@@ -61,7 +61,7 @@ class VertexBufferLayout {
 
 		// Helper for normalization mapping
 		template<typename T>
-		static bool IsNormalized() {
+		static bool IsNormalized () {
 			return std::is_same<T, unsigned char>::value;
 		}
 };
