@@ -38,10 +38,7 @@ void Application::Run ()
 	Block block (BlockType::GRASS, glm::vec3 (0.0f, 0.0f, 0.0f));
 	TextureArray textures (block.GetTexturePaths ());
 	textures.Bind ();
-	//Texture texture ("../res/textures/stone.png");
-	//texture.Bind ();
 	Shader shader ("../res/shaders/basic.vert", "../res/shaders/basic.frag");
-	shader.SetUniform ("textureArray", 0);
 
 	Camera camera;
 	InputManager inputManager (m_window);

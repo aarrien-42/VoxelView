@@ -19,7 +19,7 @@ TextureArray::TextureArray (const std::vector<std::string>& paths)
 		m_data = stbi_load (paths.at(i).c_str (), &m_width, &m_height, &m_bpp, 4);
 		if (m_data)
 		{
-			glTexSubImage3D (GL_TEXTURE_2D_ARRAY, 0, 0, 0, i, 16, 16, 1, GL_RGBA, GL_UNSIGNED_BYTE, m_data);
+			glTexSubImage3D (GL_TEXTURE_2D_ARRAY, 0, 0, 0, i, m_width, m_height, 1, GL_RGBA, GL_UNSIGNED_BYTE, m_data);
 			glGenerateMipmap (GL_TEXTURE_2D_ARRAY);
 
 			stbi_image_free (m_data);

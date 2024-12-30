@@ -13,9 +13,9 @@ struct VertexBufferElement {
 	static unsigned int GetSizeOfType (unsigned int type)
 	{
 		switch (type) {
-			case GL_FLOAT:			return sizeof(float);
-			case GL_INT:	return sizeof (int);
-			case GL_UNSIGNED_INT:	return sizeof(unsigned int);
+			case GL_FLOAT:			return sizeof (float);
+			case GL_INT:		    return sizeof (int);
+			case GL_UNSIGNED_INT:	return sizeof (unsigned int);
 		}
 		throw std::runtime_error("Unsupported type in VertexBufferLayout");
 		return 0;

@@ -31,10 +31,10 @@ void Mesh::SetupMesh ()
 
 	// Vertex Buffer Layout
 	VertexBufferLayout layout;
-	layout.Push<float> (3);        // position
-	layout.Push<float> (3);        // normal
-	layout.Push<float> (2);        // texture
-	layout.Push<unsigned int> (1); // texture index
+	layout.Push<float> (3); // position
+	layout.Push<float> (3); // normal
+	layout.Push<float> (2); // texture
+	layout.Push<float> (1); // texture index
 	m_vao.AddVertexBufferLayout (layout);
 
 	// Unbind

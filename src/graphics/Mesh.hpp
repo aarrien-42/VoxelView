@@ -13,7 +13,7 @@ struct Vertex {
 	glm::vec3 position;
 	glm::vec3 normal;
 	glm::vec2 texCoords;
-	int texIndex;
+	glm::vec1 texIndex;
 };
 
 class Mesh {
