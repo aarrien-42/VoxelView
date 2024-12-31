@@ -5,8 +5,9 @@
 #include <string>
 #include <iostream>
 
-const int WINDOW_WIDTH = 800;
-const int WINDOW_HEIGHT = 600;
+extern int WINDOW_WIDTH;
+extern int WINDOW_HEIGHT;
+
 
 /**
 * @brief Represents a window for the application
@@ -16,8 +17,6 @@ class Window {
 		Window (int width, int height, std::string title);
 		~Window ();
 
-		int GetWidth () const;
-		int GetHeight () const;
 		float GetDeltaTime () const;
 		float GetFPS () const;
 		void GetCursorPos (double& x, double& y);
@@ -37,7 +36,6 @@ class Window {
 		GLFWwindow* m_window;
 
 		std::string m_title;
-		int m_width, m_height;
 		float m_lastFrame;
 		float m_deltaTime;
 };

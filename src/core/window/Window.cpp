@@ -1,25 +1,23 @@
 #include "Window.hpp"
 
+int WINDOW_WIDTH = 800;
+int WINDOW_HEIGHT = 600;
+
 Window::Window (int width, int height, std::string title)
-	: m_window (nullptr), m_width (width), m_height (height), m_title (title)
+	: m_window (nullptr), m_title (title)
 {
+	// Set the last frame time to the current time
 	m_lastFrame = 0.0f;
 	m_deltaTime = 0.0f;
+
+	// Set the window width and height
+	WINDOW_WIDTH = width;
+	WINDOW_HEIGHT = height;
 }
 
 Window::~Window ()
 {
 	glfwTerminate ();
-}
-
-int Window::GetWidth () const
-{
-	return m_width;
-}
-
-int Window::GetHeight () const
-{
-	return m_height;
 }
 
 float Window::GetDeltaTime () const
@@ -57,7 +55,7 @@ bool Window::Init ()
 	glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Create a window
-	m_window = glfwCreateWindow (m_width, m_height, m_title.c_str (), nullptr, nullptr);
+	m_window = glfwCreateWindow (WINDOW_WIDTH, WINDOW_HEIGHT, m_title.c_str (), nullptr, nullptr);
 
 	// Check if the window was created successfully
 	if (!m_window)
@@ -114,8 +112,8 @@ void Window::FramebufferSizeCallback (GLFWwindow* window, int newWidth, int newH
 	Window* win = static_cast<Window*>(glfwGetWindowUserPointer (window));
 	if (win)
 	{
-		win->m_width = newWidth;
-		win->m_height = newHeight;
+		WINDOW_WIDTH = newWidth;
+		WINDOW_HEIGHT = newHeight;
 		glViewport (0, 0, newWidth, newHeight);
 	}
 }

@@ -47,16 +47,16 @@ void Application::Run ()
 
 	while (!m_window->ShouldClose ())
 	{
-		m_renderer->SetClearColor (glm::vec4 (0.2f, 0.3f, 0.3f, 1.0f));
+		// Clear the screen
 		m_renderer->Clear ();
 
-		// Draw mesh
+		// Draw
 		block.SetPosition (glm::vec3 (0.0f, 0.0f, 0.0f));
 		m_renderer->Draw (block, shader);
 		block.SetPosition (glm::vec3 (1.0f, 0.0f, 0.0f));
 		m_renderer->Draw (block, shader);
 
-		// check and call events and swap the buffers
+		// Swap the buffers
 		m_window->SwapBuffers ();
 
 		// Update the input events
