@@ -34,8 +34,7 @@ void Renderer::Draw (GLsizei count, GLenum mode)
 
 void Renderer::Draw (Mesh& mesh, Shader& shader)
 {
-	if (m_camera == nullptr)
-	{
+	if (m_camera == nullptr) {
 		std::cerr << "Camera is not set" << std::endl;
 		return;
 	}
@@ -45,7 +44,7 @@ void Renderer::Draw (Mesh& mesh, Shader& shader)
 
 	glm::mat4 model = glm::translate (glm::mat4 (1.0f), mesh.GetPosition ());
 	glm::mat4 view = m_camera->GetViewMatrix ();
-	glm::mat4 projection = m_camera->GetProjectionMatrix ();
+	glm::mat4 projection = m_camera->GetPerspectiveProjectionMatrix ();
 
 	shader.SetUniform ("model", model);
 	shader.SetUniform ("view", view);
@@ -53,6 +52,20 @@ void Renderer::Draw (Mesh& mesh, Shader& shader)
 
 	glDrawElements (GL_TRIANGLES, mesh.GetIndexCount (), GL_UNSIGNED_INT, nullptr);
 }
+
+// void Renderer::Draw (Text& text, Shader& shader)
+// {
+// 	shader.Bind ();
+// 
+// 	glm::mat4 projection = m_camera->GetOrthogonalProjectionMatrix ();
+// 
+// 	shader.SetUniform ("textColor", text.GetColor ());
+// 	shader.SetUniform ("projection", projection);
+// 
+// 	text.Bind ();
+// 	glDrawElements (GL_TRIANGLES, static_cast<GLsizei>(text.GetIndexCount ()), GL_UNSIGNED_INT, nullptr);
+// 	text.Unbind ();
+// }
 
 void Renderer::SetClearColor (const glm::vec4& color)
 {

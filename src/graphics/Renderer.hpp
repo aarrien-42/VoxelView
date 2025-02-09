@@ -8,6 +8,7 @@
 #include "graphics/Mesh.hpp"
 #include "graphics/OpenGL/Shader.hpp"
 #include "scene/Camera.hpp"
+#include "gui/Text.hpp"
 
 /**
 * @brief Renderer class
@@ -23,8 +24,10 @@ class Renderer {
 		void Clear ();
 		void Draw (GLsizei count, GLenum mode = GL_TRIANGLES);
 		void Draw (Mesh& mesh, Shader& shader);
+		// void Draw (Text& text, Shader& shader);
 
 		void SetClearColor (const glm::vec4& color);
 	private:
 		Camera *m_camera;
+		GLuint VBO;
 };

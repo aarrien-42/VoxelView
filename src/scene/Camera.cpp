@@ -134,9 +134,14 @@ glm::mat4 Camera::GetViewMatrix () const
 	return glm::lookAt (m_position, m_position + m_front, m_up);
 }
 
-glm::mat4 Camera::GetProjectionMatrix () const
+glm::mat4 Camera::GetPerspectiveProjectionMatrix () const
 {
 	return glm::perspective (glm::radians (m_fov), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
+}
+
+glm::mat4 Camera::GetOrthogonalProjectionMatrix () const
+{
+	return glm::ortho (0.0f, static_cast<float>(WINDOW_WIDTH), static_cast<float>(WINDOW_HEIGHT), 0.0f);
 }
 
 void Camera::UpdateCameraVectors ()

@@ -36,7 +36,8 @@ class Camera : public IControl {
 		void Zoom (float x);
 
 		glm::mat4 GetViewMatrix () const;
-		glm::mat4 GetProjectionMatrix () const;
+		glm::mat4 GetPerspectiveProjectionMatrix () const;
+		glm::mat4 GetOrthogonalProjectionMatrix () const;
 	private:
 		void UpdateCameraVectors ();
 

@@ -13,6 +13,7 @@
 #include "graphics/OpenGL/TextureArray.hpp"
 
 #include "game/Block.hpp"
+#include "gui/Font.hpp"
 
 /**
 * @brief Main application class

@@ -35,10 +35,14 @@ bool Application::Init ()
 
 void Application::Run ()
 {
+	// Block
 	Block block (BlockType::BEDROCK, glm::vec3 (0.0f, 0.0f, 0.0f));
 	TextureArray textures (block.GetTexturePaths ());
-	textures.Bind ();
 	Shader shader ("../res/shaders/basic.vert", "../res/shaders/basic.frag");
+
+	// Text
+	Font font ("../res/fonts/arial.ttf", 48);
+	Shader textShader ("../res/shaders/text.vert", "../res/shaders/text.frag");
 
 	Camera camera;
 	InputManager inputManager (m_window);
@@ -51,10 +55,14 @@ void Application::Run ()
 		m_renderer->Clear ();
 
 		// Draw
+		textures.Bind ();
 		block.SetPosition (glm::vec3 (0.0f, 0.0f, 0.0f));
 		m_renderer->Draw (block, shader);
 		block.SetPosition (glm::vec3 (1.0f, 0.0f, 0.0f));
 		m_renderer->Draw (block, shader);
+
+		// Draw text
+		// m_renderer->Draw (text, textShader);
 
 		// Swap the buffers
 		m_window->SwapBuffers ();

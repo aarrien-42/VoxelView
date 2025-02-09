@@ -27,6 +27,8 @@ TextureArray::TextureArray (const std::vector<std::string>& paths)
 			stbi_image_free (m_data);
 		}
 	}
+
+	glBindTexture (GL_TEXTURE_2D_ARRAY, 0);
 }
 
 TextureArray::~TextureArray ()
