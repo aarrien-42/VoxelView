@@ -30,10 +30,12 @@ foreach(DIR ${ALL_DIRS})
 endforeach()
 
 # Include dependencies directories
+include_directories(${THIRD_PARTY_DIR}/freetype/include)
 include_directories(${THIRD_PARTY_DIR}/glew/include)
 include_directories(${THIRD_PARTY_DIR}/glfw/include)
 
 # Link directories for external libraries
+link_directories(${THIRD_PARTY_DIR}/freetype/lib)
 link_directories(${THIRD_PARTY_DIR}/glew/lib)
 link_directories(${THIRD_PARTY_DIR}/glfw/lib)
 
