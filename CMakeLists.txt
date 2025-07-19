@@ -46,7 +46,8 @@ add_definitions(-DGLEW_STATIC)
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 # Link external libraries
-target_link_libraries(${PROJECT_NAME} glew32s glfw3 opengl32)
+target_link_libraries(${PROJECT_NAME} glew32s glfw3 opengl32 freetype)
+
 
 # Set binary output directory
 set_target_properties(${PROJECT_NAME} PROPERTIES

@@ -16,6 +16,7 @@ class Buffer {
 		void Unbind () const;
 
 		void SetData (const void* data, size_t size, GLenum usage = GL_STATIC_DRAW) const;
+		void SetSubData (const void* data, size_t size) const;
 	private:
 		GLuint m_id;
 		Type m_type;

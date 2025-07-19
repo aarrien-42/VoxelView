@@ -80,12 +80,12 @@ Shader::~Shader ()
 	glDeleteProgram (m_id);
 }
 
-void Shader::Bind () const
+void Shader::Use () const
 {
 	glUseProgram (m_id);
 }
 
-void Shader::Unbind () const
+void Shader::Unuse () const
 {
 	glUseProgram (0);
 }

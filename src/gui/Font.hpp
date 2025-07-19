@@ -1,19 +1,17 @@
 #pragma once
 
 #include <GL/glew.h>
-
-#include <stb/stb_truetype.h>
+#include <glm/glm.hpp>
 
 #include <string>
-#include <unordered_map>
-#include <vector>
+#include <map>
 
 // Structure to hold character metadata for rendering
 struct Character {
-    float u0, v0, u1, v1; // Texture coordinates
-    int width, height;    // Glyph size
-    int bearingX, bearingY; // Offset from baseline
-    int advance;          // Advance to the next character
+    unsigned int TextureID; // ID handle of the glyph texture
+    glm::ivec2   Size;      // Size of glyph
+    glm::ivec2   Bearing;   // Offset from baseline to left/top of glyph
+    unsigned int Advance;   // Horizontal offset to advance to next glyph
 };
 
 class Font {
@@ -21,16 +19,10 @@ class Font {
         Font (const std::string& fontPath, int fontSize);
         ~Font ();
 
-        GLuint GetTextureID () const { return textureID; }
-        const Character& GetCharacter (char c) const { return characters.at (c); }
-
+        inline Character GetChar (char c) const { return m_characters.at(c); }
     private:
-        void LoadFont (const std::string& fontPath);
-        void GenerateTextureAtlas (int fontSize);
+        bool Init (const std::string& fontPath);
 
-        GLuint textureID;
-        stbtt_fontinfo fontInfo;
-        std::unordered_map<char, Character> characters;
-        std::vector<unsigned char> fontBuffer;
+        unsigned int m_fontWidth, m_fontHeight;
+        std::map<char, Character> m_characters;
 };
-

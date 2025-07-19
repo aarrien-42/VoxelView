@@ -24,7 +24,7 @@ class Renderer {
 		void Clear ();
 		void Draw (GLsizei count, GLenum mode = GL_TRIANGLES);
 		void Draw (Mesh& mesh, Shader& shader);
-		// void Draw (Text& text, Shader& shader);
+		void Draw (Text& text, Shader& shader);
 
 		void SetClearColor (const glm::vec4& color);
 	private:

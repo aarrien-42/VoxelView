@@ -4,6 +4,9 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 Application::Application (int width, int height, std::string title)
 {
 	m_window = new Window (width, height, title);
@@ -41,7 +44,9 @@ void Application::Run ()
 	Shader shader ("../res/shaders/basic.vert", "../res/shaders/basic.frag");
 
 	// Text
-	Font font ("../res/fonts/arial.ttf", 48);
+	Font font ("../res/fonts/arial.ttf", 128);
+	Text text ("Hello world!", font);
+	text.SetPosition (glm::vec2 (100.0f, 500.0f));
 	Shader textShader ("../res/shaders/text.vert", "../res/shaders/text.frag");
 
 	Camera camera;
@@ -58,11 +63,11 @@ void Application::Run ()
 		textures.Bind ();
 		block.SetPosition (glm::vec3 (0.0f, 0.0f, 0.0f));
 		m_renderer->Draw (block, shader);
-		block.SetPosition (glm::vec3 (1.0f, 0.0f, 0.0f));
+		block.SetPosition (glm::vec3 (2.0f, 0.0f, 0.0f));
 		m_renderer->Draw (block, shader);
 
 		// Draw text
-		// m_renderer->Draw (text, textShader);
+		m_renderer->Draw (text, textShader);
 
 		// Swap the buffers
 		m_window->SwapBuffers ();

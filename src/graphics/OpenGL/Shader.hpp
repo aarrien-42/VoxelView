@@ -13,8 +13,8 @@ class Shader {
 		Shader (const char* vertexPath, const char* fragmentPath);
 		~Shader ();
 
-		void Bind () const;
-		void Unbind () const;
+		void Use () const;
+		void Unuse () const;
 
 		GLint GetUniformLocation (const std::string& name) const;
 		void SetUniform (const std::string& name, int value) const;

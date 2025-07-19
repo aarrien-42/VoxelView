@@ -1,99 +1,96 @@
 #include "Font.hpp"
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include <iostream>
 #include <fstream>
 
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"
-
-#define STB_TRUETYPE_IMPLEMENTATION 
-#include "stb_truetype.h"
-
 Font::Font (const std::string& fontPath, int fontSize)
+	: m_fontWidth (0), m_fontHeight (fontSize)
 {
-    LoadFont (fontPath);
-    if (!fontBuffer.empty ())
-    {
-        GenerateTextureAtlas (fontSize);
-    }
+    Init (fontPath);
 }
 
 Font::~Font ()
 {
-    glDeleteTextures (1, &textureID);
+	for (auto& character : m_characters) {
+		glDeleteTextures (1, &character.second.TextureID);
+	}
 }
 
-// Load font file into memory
-void Font::LoadFont (const std::string& fontPath)
+bool Font::Init (const std::string& fontPath)
 {
-    FILE* fontFile = fopen (fontPath.c_str (), "rb");
-    if (!fontFile)
+    FT_Library ft;
+    if (FT_Init_FreeType (&ft))
     {
-        std::cerr << "Failed to open font file: " << fontPath << std::endl;
-        return;
+        std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+        return false;
     }
 
-    fseek (fontFile, 0, SEEK_END);
-    long size = ftell (fontFile);
-    fseek (fontFile, 0, SEEK_SET);
-    fontBuffer.resize (size);
-    fread (fontBuffer.data (), size, 1, fontFile);
-    fclose (fontFile);
-
-    if (!stbtt_InitFont (&fontInfo, fontBuffer.data (), 0))
+    FT_Face face;
+    if (FT_New_Face (ft, fontPath.c_str (), 0, &face))
     {
-        std::cerr << "Failed to initialize font." << std::endl;
-        fontBuffer.clear ();
+        std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
+        return false;
     }
-}
-
-void Font::GenerateTextureAtlas (int fontSize)
-{
-    float scale = stbtt_ScaleForPixelHeight (&fontInfo, fontSize);
-    int atlasWidth = 512, atlasHeight = 256;
-    std::vector<unsigned char> bitmap (atlasWidth * atlasHeight, 0);
-
-    int xOffset = 0, yOffset = 0, maxRowHeight = 0;
-    for (char c = 32; c < 127; ++c)
+    else
     {
-        int w, h, xOff, yOff;
-        unsigned char* glyphBitmap = stbtt_GetCodepointBitmap (&fontInfo, 0, scale, c, &w, &h, &xOff, &yOff);
+        // set size to load glyphs as
+        FT_Set_Pixel_Sizes (face, m_fontWidth, m_fontHeight);
 
-        if (xOffset + w >= atlasWidth)
-        {
-            xOffset = 0;
-            yOffset += maxRowHeight;
-            maxRowHeight = 0;
-        }
+        // disable byte-alignment restriction
+        glPixelStorei (GL_UNPACK_ALIGNMENT, 1);
 
-        for (int row = 0; row < h; ++row)
+        // load first 128 characters of ASCII set
+        for (unsigned char c = 0; c < 128; c++)
         {
-            for (int col = 0; col < w; ++col)
+            // Load character glyph 
+            if (FT_Load_Char (face, c, FT_LOAD_RENDER))
             {
-                bitmap[(yOffset + row) * atlasWidth + (xOffset + col)] = glyphBitmap[row * w + col];
+                std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
+                continue;
             }
+
+            // generate texture
+            unsigned int texture;
+            glGenTextures (1, &texture);
+            glBindTexture (GL_TEXTURE_2D, texture);
+            
+            // set texture options
+            glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            
+            // load data into texture
+            glTexImage2D (
+                GL_TEXTURE_2D,
+                0,
+                GL_RED,
+                face->glyph->bitmap.width,
+                face->glyph->bitmap.rows,
+                0,
+                GL_RED,
+                GL_UNSIGNED_BYTE,
+                face->glyph->bitmap.buffer
+            );
+
+            // now store character for later use
+            Character character = {
+                texture,
+                glm::ivec2 (face->glyph->bitmap.width, face->glyph->bitmap.rows),
+                glm::ivec2 (face->glyph->bitmap_left, face->glyph->bitmap_top),
+                static_cast<unsigned int>(face->glyph->advance.x)
+            };
+            m_characters.insert (std::pair<char, Character> (c, character));
         }
-
-        int advance, lsb;
-        stbtt_GetCodepointHMetrics (&fontInfo, c, &advance, &lsb);
-
-        characters[c] = { (float)xOffset / atlasWidth, (float)yOffset / atlasHeight,
-                          (float)(xOffset + w) / atlasWidth, (float)(yOffset + h) / atlasHeight,
-                          w, h, xOff, yOff, advance * (int)scale };
-
-        xOffset += w + 2;
-        maxRowHeight = std::max (maxRowHeight, h);
-        stbtt_FreeBitmap (glyphBitmap, nullptr);
+        glBindTexture (GL_TEXTURE_2D, 0);
     }
 
-    // Save the texture atlas to a file
-    stbi_write_png ("TextAtlas.png", atlasWidth, atlasHeight, 1, bitmap.data (), atlasWidth);
+    // destroy FreeType once we're finished
+    FT_Done_Face (face);
+    FT_Done_FreeType (ft);
 
-    glGenTextures (1, &textureID);
-    glBindTexture (GL_TEXTURE_2D, textureID);
-    glTexImage2D (GL_TEXTURE_2D, 0, GL_RED, atlasWidth, atlasHeight, 0, GL_RED, GL_UNSIGNED_BYTE, bitmap.data ());
-    glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    return true;
 }

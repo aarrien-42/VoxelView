@@ -24,3 +24,8 @@ void Buffer::SetData (const void* data, size_t size, GLenum usage) const
 {
 	glBufferData (static_cast<GLenum>(m_type), size, data, usage);
 }
+
+void Buffer::SetSubData (const void* data, size_t size) const
+{
+	glBufferSubData (static_cast<GLenum>(m_type), 0, size, data);
+}
