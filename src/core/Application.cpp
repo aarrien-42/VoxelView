@@ -4,9 +4,6 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
-
 Application::Application (int width, int height, std::string title)
 {
 	m_window = new Window (width, height, title);
