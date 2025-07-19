@@ -44,9 +44,10 @@ void Application::Run ()
 	Shader shader ("../res/shaders/basic.vert", "../res/shaders/basic.frag");
 
 	// Text
-	Font font ("../res/fonts/arial.ttf", 128);
+	Font font ("../res/fonts/arial.ttf", 48);
 	Text text ("Hello world!", font);
 	text.SetPosition (glm::vec2 (100.0f, 500.0f));
+	text.SetColor (glm::vec3 (0.0f, 1.0f, 1.0f));
 	Shader textShader ("../res/shaders/text.vert", "../res/shaders/text.frag");
 
 	Camera camera;

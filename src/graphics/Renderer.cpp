@@ -59,7 +59,7 @@ void Renderer::Draw (Text& text, Shader& shader)
 {
 	shader.Use ();
 	shader.SetUniform ("projection", m_camera->GetOrthogonalProjectionMatrix ());
-	shader.SetUniform ("textColor", glm::vec3 (1.0, 0.0, 0.0));
+	shader.SetUniform ("textColor", text.GetColor ());
 
 	VertexArray vao;
 	VertexBuffer vbo;
@@ -69,7 +69,6 @@ void Renderer::Draw (Text& text, Shader& shader)
 	vao.Bind ();
 
 	glm::vec2 origin = text.GetPosition ();
-
 	for (const char& c : text.GetText ())
 	{
 		Character character = text.GetFont ().GetChar (c);
